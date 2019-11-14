@@ -1,37 +1,493 @@
-# AndroidCheatSheet
-Short notes of Android SDK. Keywords to remember. 
-
-
-#### ConstrainLayout 
-Guidelines, Barriers, Chains and Groups
-groups: contain references to view ids and can be used to hide or show views 
+ConstrainLayout - Guidelines, Barriers, Chains and Groups
+========================================================
+Ref: https://riggaroo.co.za/constraintlayout-guidelines-barriers-chains-groups/
+Groups: contain references to view ids and can be used to hide or show views 
 Guidelines: are fixed 
 Barriers: are flexible and can be attached to view 
 Chains Types: 
-spread(---1---1---1---)
-spread-inside(1-----1-----1) 
-packed(-----111-----) 
-// similar to linearlayout 
-weighted( 1[   1   ]1 )
+spread			(---1---1---1---)
+spread-inside		(1------1------1) 
+packed			(------111------) 
+// similar to		
+// weight system of 
+// linearlayout 
+weighted		( 1[    1    ]1 )
 
-### Retrofit v2 
+
+Retrofit v2 
+========================================================
 http methods : 
-@Path 		  - dynamic urls or @GET Call<String> query(@Url String fileUrl);  
-@Headers 	  - add headers
-GET			    - Query; QueryMap
-POST		    - Field; FieldMap  
+@Path 		- dynamic urls or @GET Call<String> query(@Url String fileUrl);  
+@Headers 	- add headers
+GET			- Query; QueryMap
+POST		- Field; FieldMap  
 Multipart 	- @Part array: Array<MultipartBody.Part> 
-			        RequestBody.create(MediaType, imageFile); 
-			        MultipartBody.Builder.( addFormDataPart(key, RequestBody.create) x MultipleTimes )	
-  
+			  RequestBody.create(MediaType, imageFile); 
+			  MultipartBody.Builder.( addFormDataPart(key, RequestBody.create) x MultipleTimes )			  
+			  
 Download Files 
 @Streaming for large files 
 @GET Call<ResponseBody> download(@Url String fileUrl);
-responseBody.body() -> is a IOStream -> save file you normally do
-  
+responseBody.body() -> is a IOStream -> save file you normally do 
+
 SSL Pinning 
-certificate pinner -> add(domain, "sha256/abcdefghijk") 
+certificate pinner -> add(domain, "sha256/dhjfhdjf)
 
 ssl concept : sslSocketFactory, trustmanager, CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
 interceptor : http interceptor 
 converters  : gson.converter, scalar converter
+
+ViewPager / Tab Layout 
+========================================================
+layout.xml 
+------------
+CoordinatorLayout 
+	AppBarLayout 
+		Toolbar
+			TabLayout
+	ViewPager 
+				
+code 
+tabLayout.setupWithViewPager(viewPager(this is view and not adapter))		
+note: use nestedscrollview with cordinator layout for that scrolling effect.
+
+FileProvider 
+========================================================
+path & providers -> external path ; getUriFromFile ; only used to pass the URI in intent output of the camera 
+
+Live Data 
+========================================================
+Generally, LiveData delivers updates only when data changes, and only to active observers. 
+An exception to this behavior is that observers also receive an update when they change from an inactive to an active state. 
+Furthermore, if the observer changes from inactive to active a second time, 
+it only receives an update if the value has changed since the last time it became active.
+
+with Event Wrapper : content handled 
+https://medium.com/@star_zero/singleliveevent-livedata-with-multi-observers-384e17c60a16
+
+with Multiple Observers for SingleLiveEvent : extends MutableLiveData
+https://medium.com/@star_zero/singleliveevent-livedata-with-multi-observers-384e17c60a16
+
+Transformations.map => similar to RxJava map 
+custom transformations can be implemented using MediatorLiveData 
+
+setValue = call from MainThread ; postValue = call from Worker Thread
+
+Fragments to ViewModel 
+( Pushing events like toast message, etc from VM to Fragment )
+========================================================
+ViewModel{
+	val commandDelegate: NotifyEventLiveData<DataPojo> (MutableLiveData)
+	fun postEvent(event: DataPojo){
+		commandDelegate.setValue( event )
+	}
+}
+
+Fragment{
+	onViewCreated(){
+		commandDelegate.observe{
+			when(event.type){
+				// show toast, dismiss do anything that you want
+			}
+		}
+	}
+}
+
+Activity to all fragments; 
+========================================================
+But in most cases you don't need this because livedata generally updates everything, when changed in DB.
+
+Activity{
+	val activityBroadcast: NotifyFragmentsLiveData<DataPojo> (MutableLiveData)
+	fun getObserver() = activityBroadcast
+}
+
+Fragment1, Fragment2, Fragment3{
+	onActivityCreated{
+		getObserver().observe{ }
+	}
+	
+	onViewCreated{
+		getObserver().setValue{ DataPojo }
+	}
+}
+
+
+Work Manager 
+========================================================
+Request Type -> OneTime & Periodic Request 
+Type -> Worker(Simplest and recomended ), Coroutine Worker(for kotlin users), RxWorker(for rxjava2), (base/object class)Listenable Worker 
+PeriodicWorkRequest cannot be chained.
+
+// Check for uniqueness previously using requestID 
+WorkManager.enqueueUniqueWork(String, ExistingWorkPolicy, OneTimeWorkRequest) OR
+WorkManager.enqueueUniquePeriodicWork(String, ExistingPeriodicWorkPolicy, PeriodicWorkRequest) 
+
+2nd argument => resolution policy of what should be done incase of an unfinished chain of work with that unique name
+
+// For Progress or Broadcast Manager 
+setProgressAsync(new Data.Builder().putInt(PROGRESS, 0).build());
+WorkManager.getInstance()..getWorkInfoByIdLiveData(requestId).observe(this, onUpdateChanged(){
+	Data progress = workInfo.getProgress()
+	int value = progress 
+})
+
+Kotlin 
+========================================================
+
+BabyChild extends Parent extends GrandParent
+
+Covariance
+input		:	TaxPayer<Parent>
+acceptable 	: 	Parent, BabyChild
+
+Contravariance
+input		:	Adult<Parent>
+acceptable	:  	GrandParent, Parent 
+
+Invariance 
+input		:	Customer<Parent>
+acceptable	: 	Parent
+
+Bivariance 
+input		:	Parent<Parent>
+acceptable	: 	GrandParent, Parent, BabyChild
+
+Scope Functions Kotlin: 
+
+lal-war
+
+let 	= it 	: lambda result 
+also 	= it 	: context object 
+with 	= this 	: lambda result 
+apply 	= this  : context object
+run 	= this 	: lambda result 
+
+Firebase Push Notifications 
+========================================================
+- Payload size 4KB 
+- When application is in foreground you have to override on message received
+- When application is in background, it calls default notification and on click opens the launcher activity
+
+remove notification json object and send data in "data" jsonobject from the push json to deliver the message even when the app is killed.
+
+Ran some steps : 
+1. Internet permissions are merged in manifest by firebase messaging, so even if the app doesnt hold a internet permission.
+
+Android Q 
+========================================================
+Privacy Changes 
+https://developer.android.com/about/versions/10/privacy
+No hardware details or IMEI number.
+
+Activity & Task 
+========================================================
+activities are not loaded in vaccum, it is rather loaded in a unit called as task. Task maintains stack of activities
+and follows first in last out.
+
+onConfigChanges : 
+If you don't want new activities to be created, you can define onConfigChanges and then the orientation, so 
+onConfigurationChange{} method will be called in Activity in case of such event.
+
+standard(default) : creates new activity every time, irrespective of anything 
+singleTop : 
+makes sure the top is never duplicated, 
+example current stack -> A, B, C, D  
+1) load D again > it wont load a new one, but exisiting onNewIntent is called. 
+2) load B again > new stack will be A, B, C, D, B 
+singleTask : 
+creates a new task for activity if it doesnt exists. But will use the same if it already there. All new activity are loaded in the same task 
+single instance : 
+a single task holding the only activity is loaded. Rest all behaviour is similar to singleTask 
+Intent flags 
+FLAG_ACTIVITY_CLEAR_TOP -> clears top activity and calls onNewIntent for exisiting activtiy.
+
+========================================================
+Handling affinities (taskAffinity)
+The affinity indicates which task an activity prefers to belong to. 
+By default, all the activities from the same app have an affinity for each other. 
+So, by default, all activities in the same app prefer to be in the same task. 
+
+========================================================
+onSaveInstanceState
+For example, if activity B is launched in front of activity A, 
+and at some point activity A is killed to reclaim resources, 
+activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, 
+the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle)
+
+Fragments 
+========================================================
+To call fragments 
+with UI : findFragmentById()
+without UI : findFragmentByTag()
+
+Fragment 
+1. ChildFragment
+2. Navigations 
+
+========================================================
+Each of the options for preserving UI state vary along the following dimensions that impact the user experience:
+						ViewModel 		Saved instance state 	Persistent storage
+Storage location 				in memory 		serialized to disk 	on disk or network
+Survives 
+configuration change 				Yes 			Yes 			Yes
+Survives system-initiated 
+process death 					No 			Yes 			Yes
+Survives user complete 
+activity dismissal/onFinish() 			No 			No 			Yes
+Data limitations 			complex objects are fine,	only for primitive	only limited by disk space
+					but space is limited by		types and simple,	or cost / time of retrieval
+					available memory.		small objects		from the network resource.
+									such as String
+  	  
+Read/write time 			quick (memory access only) 	slow 			slow (requires disk access
+									(requires		or network transaction)
+									serialization
+									& deserialization
+									and disk access) 	 
+========================================================									
+MVVM Plain [can only be implemented using]
+	- Data Binding 
+	- RxJava 
+	- LiveData 
+	
+MVVM uses observer pattern 
+Activity  ViewModel  Repository ( Local/Remote/Shared ) 
+	
+MVVM with Data Binding	
+========================================================
+Activity 
+    	// Referenced xml name
+	@BindingAdapter({"toastMessage"})
+	public static void thisWillRun(View view, String message)
+
+VM 
+	@Bindable 
+	String toastMessage
+		get 
+		set {
+			notifyPropertyChanged(BR.toastMessage)
+		}
+ 
+layout 
+	// Two way binding @={variable}
+	// whenever viewmodel toastMessage variable changes, referenced method from activity is called 
+	bind:toastMessage="=@{viewModel.toastMessage}"	
+	
+SOLID Principles 
+========================================================
+Single Reponsibility 
+	Ex: class Task{ downloadFile(), parseFile() }
+	    Right way to break class to serve single principle 
+	    class Downloader{ downloadFile()  }
+	    class Parser { parseFile() }
+
+Repository Pattern 
+	Ex: class NewsDao{ getById(), getAll(), getByCategory(), getNewerThan() }
+	    instead create a query method which accepts the specifications (byId, all, bycategory, newerthan)
+	    class NewsDao{ List<T> query(Specifications) }
+	    
+Clean Architecture 
+========================================================
+3 Layers
+Data(Repository Pattern)  Domain(Single Responsibility) Presentation(Presenter)
+
+usecases stays in domain layer, and data and presenter they both use mapper, to be totally isolated.
+1. Data.source { FirebaseDatabaseHelper { getAllNews(): NewsFeed } }
+2. Domain.usecase { GetNewsfeedUsecase { define execute(): new GetNewsfeedUsecase.ResponseValues(response obj from Step 1) }}
+3. Presenter.ListActivityPresenter { showList(){ view().showList( usecase.execute() ) } }
+
+Domain has the main Pojo and uses mapper to move objects between layers 
+
+VIPER Architecture 
+========================================================
+View (activity)
+Interactor (usecase)
+Presenter (logic)
+Entity (data)
+Routing (business flow)
+
+Firebase 
+========================================================
+Authentication 
+- Create Project and then select Sign-in Providers as Email/Password
+- Use methods 
+    firebase.createUserWithEmailAndPassword(username, password, complete listener)
+	firebase.signInWithEmailAndPassword(username, password, complete listener)
+Database 
+- Create Project and then select firebase database create your json structure 
+	{ "user" : {  } }
+- Use methods
+	- db = FirebaseDatabase.getInstance().getReference("database-name")
+	- db.child("user").setValue() // create, update 
+	- db.child("user").addValueEventListener( valueEventListener ) // get 
+	- db.child("user").setValue(null) // delete data
+	
+	
+RxJava2
+========================================================
+Observable - Speaker
+Operators  - Translator
+Observer   - Listener
+
+Types 
+1. Observable  
+	.create ObservableOnSubscribe { emitter.onNext emitter.onComplete emitter.onError }
+	.subscribe{ Observer { onNext onError onComplete } }
+2. Flowable    
+	same as above, just needs a BackpressureStrategy 
+3. Single
+	.create SingleObserverSubscribe { emitter.onSuccess emitter.onComplete }
+	.subscribe{ SingleObserver { onSuccess onComplete } }
+4. Maybe
+	.create same as above (step 3)
+	.subscribe{ MaybeObserver { onSuccess onError onComplete } }
+5. Completable
+	.subscribe{ CompletableObserver { onComplete onError } }
+	
+Operators 
+1. Filter   		-> filters out stuff at defined 
+2. Debounce 		-> shoots at specified interval 
+3. DistinctUntilChanged -> just compares with the last emitted value 
+4. Zip - 	 	-> Parallel execution
+5. FlatMap	 	-> maps to new observable and runs independently 
+	input -> ( a,b,c,d,e,f ).flatMap{ ( emittedItem + "x" ).delay(1 sec) }
+	output-> [cx, ex, fx, bx, dx, ax]
+
+6. SwitchMap -> unsubscribes to previous observable
+	input -> ( a,b,c,d,e,f ).flatMap{ ( emittedItem + "x" ).delay(1 sec) }
+	output-> [fx]
+		
+7. ConcatMap -> same as FlatMap but preserves order		
+    output-> [ax, bx, cx, dx, ex, fx]
+
+8. ThrottleLast( time-window: 1 sec ) 
+	input -> ( a,b,c,d,e,f )
+	output-> [----b----e---]
+	
+9. Concat   -> concats two observable sequentially 
+	input -> ( ().delay( 1 sec ) , ().delay( 1 sec ) )
+	output-> ( 2 sec )
+	
+MLKit 
+========================================================
+face detection types 
+	landmarks : eyes, ears, nose, cheeks, mouth, etc 
+	contours  : facial features eyebrows 
+	classifications : smiling and eyes open
+
+trained ml file 
+	mobilenet_v1_1.0_224_quant.tflite
+
+Basic steps : 
+    1. FirebaseVisionFaceDetectorOptions to define the options such as accuracy, etc 
+	2. Create FirebaseVisionImage from bitmap
+	3. FirebaseVisionFaceDetector.getVisionDetector(options).detectInImage( step 2 ).successListener( FirebaseVisionFace )
+	4. face.getHeadEulerAngleY(), face.getBoundingBox()
+	
+	Camera 
+	1. attach Camera.PreviewCallback to Camera.
+	2. onPreviewFrame is called at every frame 
+	
+	RxJava 
+	1. PublishSubject<FrameData> 
+	2. PublishSubject.create()
+		.toFlowable(BackpressureStrategy.DROP)
+		.throttleLast(SHOTS_DELAY, TimeUnit.SECONDS)
+		.switchMap 
+		.filter 
+		.observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+		.doOnComplete
+		.doOnNext
+		.doOnError
+		.subscribe
+		
+	3. Composite Disposable 	
+		
+Implementation : for realness we had blink test 
+Caching -> Observable.concat(memory, disk, network).firstElement
+
+ARCore
+========================================================
+Programming steps : 
+	1. extends ARfragment 
+	2. getSceneView().getScene().addOnUpdateListener(this)
+	3. onUpdate() - callbacks
+	4. Collection<AugmentedImage> list = frame.getUpdatedTrackables(AugmentedImage.class)
+	5. Match the augmented images with name()
+	
+Challenges 
+	1. ViewRenderable vs [ Shape > Material > Texture > rangoli.png ]
+	
+IBM MobileFirst 
+========================================================
+Project on Console 
+	1. Create a android native application on IBM MobileFirst Console and download wlclient.properties files.
+
+Android
+	1. Add wlclient.properties in assets - has server information : protocol , address , port number, context 
+	2. Connect IBM MobileFirst WLClient.createInstance(ActivityLogin.this).connect(listener{ onSuccess onFailure })
+	3. queryParams = Queryparams('url', 'json.toString')
+	4. WLResourceRequest(adapterPath, POST).setQueryParameter("params", queryParams).send(listener{ onSuccess onFailure })
+	
+Mockito, Espresso
+========================================================
+repository = mock(Repository.class)
+when(repository.getMessage).thenReturn("String")
+verify(repository, atleastOnce()).getMessage()
+
+AndroidX test core, Espresso 
+ActivityScenario.launch(TasksActivity::class.java)
+onView(withId(R.id.save_task_fab)).perform(click())
+onView(withId(R.id.add_task_description_edit_text)).perform(replaceText("NEW DESCRIPTION"))
+onView(withId(R.id.task_detail_description_text)).check(matches(withText("DESCRIPTION")))
+
+Flutter 
+========================================================
+Dart 
+var, const, dynamic , String, int 
+
+
+Stateless & StatefulWidget 
+void main() => runApp(MyApp())
+MyApp extends StatelessWidget { build{ MaterialApp ( home: Scaffold ( appBar: AppBar(  ) body : Center( child : Text("Hello") )) ) } }
+Timer extends StatefulWidget { createState() => new TimerState() }
+TimerState extends State<TimerPojo> { build(  ) }
+
+State{ 
+	initState() -> loading/ initializtion 
+	build() -> { layout }
+}
+// refreshes the state 
+setState((){ // can change any of the value from state object })
+
+attributes : padding, margin 
+
+BoxDecoration, RoundedRectangleBorder
+Image.asset('assets/images/lake.jpg')
+MaterialButton( onPressed: (  ) )
+Container( height: , width: , )
+Column 
+Row
+Align( alignment: Alignment.centerRight )
+Center extends Align
+Text( "Hello World" , style : TextStyle( fontFamily: 'vtks_distress // filename', ) )
+
+Future concepts 
+Future<Void> loadDatabase async{
+	return await loadDb()
+}
+
+// Calling 
+loadDatabase().then({ void ->  })
+
+// Updating StatefulWidgets using stream 
+
+
+// Tabs 
+Needs a TabBarController: DefaultTabController
+TabBar {
+	tabs : [ Tab( child: Text("Tab 1 Head")), Tab( child: Text("Tab 2 Head")) ]
+	body : TabBarView( children: [ new Text("Tab 1 Body"), new Text("Tab 2 Body") ]) 
+}
