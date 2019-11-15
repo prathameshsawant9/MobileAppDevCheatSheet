@@ -1,3 +1,28 @@
+Activity Lifecycle 
+========================================================
+onCreate	: called when activity is first created.
+onStart		: called when activity is becoming visible to the user.
+onResume	: called when activity will start interacting with the user.
+onPause		: called when activity is not visible to the user.
+onStop		: called when activity is no longer visible to the user.
+onRestart	: called after your activity is stopped, prior to start.
+onDestroy	: called before the activity is destroyed.
+
+Fragment Lifecycle
+========================================================
+onAttach		: called when fragment has been attached to an activity
+onCreateView		: called when it’s time for the fragment to draw its UI
+onViewCreated 		: called after the UI is ready and we need to configure resulting views
+onActivityCreated	: called after Activity onCreate is completed its execution
+onStart 		: called when fragment is visible to user
+onPause			: called to indicate user is leaving the fragment
+onStop			: called when no longer visible to user 
+onDestroyView		: called when its time for fragment to destory the UI 
+onDestroy		: called to indicate final cleanup from the fragment is released 
+onDetach		: called when fragment is disassociated from its hosting activity
+
+
+
 ConstrainLayout - Guidelines, Barriers, Chains and Groups
 ========================================================
 Ref: https://riggaroo.co.za/constraintlayout-guidelines-barriers-chains-groups/
