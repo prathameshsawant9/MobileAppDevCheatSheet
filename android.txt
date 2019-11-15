@@ -132,37 +132,6 @@ WorkManager.getInstance()..getWorkInfoByIdLiveData(requestId).observe(this, onUp
 	int value = progress 
 })
 
-Kotlin 
-========================================================
-
-BabyChild extends Parent extends GrandParent
-
-Covariance
-input		:	TaxPayer<Parent>
-acceptable 	: 	Parent, BabyChild
-
-Contravariance
-input		:	Adult<Parent>
-acceptable	:  	GrandParent, Parent 
-
-Invariance 
-input		:	Customer<Parent>
-acceptable	: 	Parent
-
-Bivariance 
-input		:	Parent<Parent>
-acceptable	: 	GrandParent, Parent, BabyChild
-
-Scope Functions Kotlin: 
-
-lal-war
-
-let 	= it 	: lambda result 
-also 	= it 	: context object 
-with 	= this 	: lambda result 
-apply 	= this  : context object
-run 	= this 	: lambda result 
-
 Firebase Push Notifications 
 ========================================================
 - Payload size 4KB 
