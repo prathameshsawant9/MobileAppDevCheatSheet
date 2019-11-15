@@ -1,0 +1,56 @@
+Flutter 
+========================================================
+Dart 
+var, const, dynamic , String, int 
+
+Stateless & StatefulWidget 
+void main() => runApp(MyApp())
+MyApp extends StatelessWidget { build{ MaterialApp ( home: Scaffold ( appBar: AppBar(  ) body : Center( child : Text("Hello") )) ) } }
+Timer extends StatefulWidget { createState() => new TimerState() }
+TimerState extends State<TimerPojo> { build(  ) }
+
+State{ 
+	initState() -> loading/ initializtion 
+	build() -> { layout }
+}
+// refreshes the state 
+setState((){ // can change any of the value from state object })
+
+attributes : padding, margin 
+
+BoxDecoration, RoundedRectangleBorder
+Image.asset('assets/images/lake.jpg')
+MaterialButton( onPressed: (  ) )
+Container( height: , width: , )
+Column 
+Row
+Align( alignment: Alignment.centerRight )
+Center extends Align
+Text( "Hello World" , style : TextStyle( fontFamily: 'vtks_distress // filename', ) )
+
+Future concepts 
+Future<Void> loadDatabase async{
+	return await loadDb()
+}
+
+// Calling 
+loadDatabase().then({ void ->  })
+
+// Broadcasting events 
+StreamController<String> streamController = new StreamController.broadcast()
+
+streamController.stream.listen(data -> {  })
+streamController.stream.listen(data -> {  })
+
+streamController.add("This a test data");
+
+// Updating StatefulWidgets using stream 
+passing the reference of streamController in the TabViews, 
+in a way to communicate with each other. 
+
+// Tabs 
+Needs a TabBarController: DefaultTabController
+TabBar {
+	tabs : [ Tab( child: Text("Tab 1 Head")), Tab( child: Text("Tab 2 Head")) ]
+	body : TabBarView( children: [ new Text("Tab 1 Body"), new Text("Tab 2 Body") ]) 
+}
