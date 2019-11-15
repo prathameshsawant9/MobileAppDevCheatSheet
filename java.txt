@@ -200,8 +200,22 @@ Current Stack => [Jack, Queen, King]
 Queue (FIFO)
 add, peek, remove(removes the head)
 
+CountDownLatch
+when you are working with multiple thread and you want them to flag you when they finish or 
+want to hold the block of execution until all finish. 
 
+Thread(latch){
+   run(){
+      Thread.sleep(10_000)
+      latch.countDown()
+   }
+}
 
+latch = CountDownLatch( 1 // Thread count)
+new Thread(latch)
+latch.await()        // waits infinitely till the thread flags 
+or 
+latch.await(2 sec)   // waits till the specified time
 
 
 
