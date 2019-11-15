@@ -1,0 +1,18 @@
+StaticLayout 
+used to draw text on canvas with autowrapping facility, 
+because canvas.drawText doesn't considers the bounds and so the text is off the screen. 
+
+LiveWallaper (Create)
+class YourLiveWallpaper extends WallpaperService{
+  constructor{
+    timerTask{
+      draw()
+    }
+  }
+
+  void draw(){
+    Canvas canvas = getSurfaceView().canvas
+    staticLayout.draw(canvas)
+  }
+}
+
