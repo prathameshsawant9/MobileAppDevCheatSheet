@@ -65,6 +65,56 @@ Creational (builders, factory, Singleton, Monostate, Fluent Interface Patterns)
 Structural (adapter, decorator, facade)
 Behavioural(chain of responsibility, iterator & strategy)
 
+Variables
+Local = methods 
+Instance = declared in class 
+class = marked static
+
+transient
+any object marked with this keyword will not be serialized
+
+volatile 
+no caching in cpu, reads directly from memory 
+
+final, finally and finalize
+class MemoryClass {
+   public void finalize(){ sop("will be called during GC") }
+}
+
+
+
+syncronized 
+when multiple threads are accessing one object, each should access it one at a time. 
+
+ThreadPoolExecutor
+creates a pool where thread can be executed and checked.
+ThreadPoolExecutor returns a future object so which can be basically used to cancel the task. 
+
+AtomicBoolean (used in concurrency)
+compare(), compareAndSet()
+
+Primitive & Wrapper 
+primitive -> boolean, byte, char, short, int, long, float and double
+wrapper   -> Boolean, Byte, Character, Short, Integer, Long, Float and Double
+
+Autoboxing & unboxing 
+
+Defaults 
+boolean defaults to false;
+byte defaults to 0;
+short defaults to 0;
+int defaults to 0;
+long defaults to 0L;
+char defaults to \u0000;
+float defaults to 0.0f;
+double defaults to 0.0d;
+object defaults to null
+
+int a // Initialized variable
+a = 9 // Instantiation 
+
+
+
 String 
 The String class is immutable, so that once it is created a String object cannot be changed,
 inorder to prevent malicious manipulation of data.
@@ -102,6 +152,13 @@ String s3 = "Leo"
 print(s1 == s2) => false      // since both reference to different location (1 in Heap and other in constant pool)
 print(s1 .equals s2) => true  // comparing values
 print(s2 == s3) => true       // since both are refering to same refernce which is coming from SCP 
+
+StringBuffer 
+Slow and thread safe
+
+StringBuilder 
+Fast and non thread safe
+
 
 Collections & Generics 
 Arrays, ArrayLists, HashSet, TreeSet, HashMap, HashSet, Stack, Queues.
@@ -142,7 +199,6 @@ Current Stack => [Jack, Queen, King]
 
 Queue (FIFO)
 add, peek, remove(removes the head)
-
 
 
 
