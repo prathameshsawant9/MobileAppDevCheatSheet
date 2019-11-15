@@ -1,0 +1,30 @@
+Variances concept 
+
+BabyChild extends Parent extends GrandParent
+
+Covariance
+input		    :	  TaxPayer<Parent>
+acceptable 	: 	Parent, BabyChild
+
+Contravariance
+input		    :	  Adult<Parent>
+acceptable	:  	GrandParent, Parent 
+
+Invariance 
+input		    :	  Customer<Parent>
+acceptable	: 	Parent
+
+Bivariance 
+input		    :	  Parent<Parent>
+acceptable	: 	GrandParent, Parent, BabyChild
+
+Scope Functions Kotlin: 
+
+                (returns)
+let 	= it 	  : lambda result 
+also 	= it 	  : context object 
+with 	= this 	: lambda result 
+apply = this  : context object
+run 	= this 	: lambda result 
+
+shorthand = lal-war
