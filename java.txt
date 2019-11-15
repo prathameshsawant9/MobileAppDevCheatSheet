@@ -1,0 +1,36 @@
+Abstract
+contains both concrete and abstract methods
+
+Interface 
+blueprint/contract of a class
+
+Enumeration (forward only)
+Used with legacy objects, can only read through elements and cannot make changes (add/remove)
+
+Iterator (forward only)
+Can be used with any Collections objects and rest is same as above
+
+ListIterator (both direction)
+can add/remove and travese in both direction with any list
+
+HashSet
+No duplicates, can accept single null value  
+ex: HashSet {“Hello”, “Hi”, “Bye”, “Run”}
+
+HashMap 
+No duplicates, can accept single null as key 
+works with key & value.
+ex: HashMap {1->”Hello”, 2->”Hi”, 3->”Bye”, 4->”Run”}
+
+Composition (has-a relationship)
+Person {
+   // Person has a job 
+   Job jb;
+}
+
+Inheritance 
+Animal {}
+Cat extends Animal {}
+
+
+
