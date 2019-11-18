@@ -339,9 +339,16 @@ since the viewmodel persists, new instance is passed when fragment detachs and r
 
 Work Manager 
 ========================================================
+Service, Job Scheduler and others are been deprecated.
+doze mode -> If a user leaves a device unplugged and stationary for a period of time, with the screen off, the device enters Doze mode. In Doze mode, the system attempts to conserve battery by restricting apps' access to network and CPU-intensive services. It also prevents apps from accessing the network and defers their jobs, syncs, and standard alarms. 
+
+when the system is in doze off mode, it is back for brief amount of time also called as maintainence window.
+
 Request Type -> OneTime & Periodic Request 
 Type -> Worker(Simplest and recomended ), Coroutine Worker(for kotlin users), RxWorker(for rxjava2), (base/object class)Listenable Worker 
 PeriodicWorkRequest cannot be chained.
+
+Periodic request has to be >= 15 mins 
 
 // Check for uniqueness previously using requestID 
 WorkManager.enqueueUniqueWork(String, ExistingWorkPolicy, OneTimeWorkRequest) OR
