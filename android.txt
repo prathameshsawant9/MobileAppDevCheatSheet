@@ -257,12 +257,19 @@ ssl concept : sslSocketFactory, trustmanager, CipherSuite.TLS_ECDHE_ECDSA_WITH_A
 interceptor : http interceptor 
 converters  : gson.converter, scalar converter
 
+example of custom interceptor 
+class HeaderInterceptor : Interceptor{
+   fun intercept(chain: Interceptor.Chain) = chain.request().addHeader("Accept", "application/json").proceed()
+}
+
 Live Data 
 ========================================================
 Generally, LiveData delivers updates only when data changes, and only to active observers. 
 An exception to this behavior is that observers also receive an update when they change from an inactive to an active state. 
 Furthermore, if the observer changes from inactive to active a second time, 
 it only receives an update if the value has changed since the last time it became active.
+
+lifecycleOwner are refresh when create, pause, resume stop destroy are called !
 
 with Event Wrapper : content handled 
 https://medium.com/@star_zero/singleliveevent-livedata-with-multi-observers-384e17c60a16
@@ -360,7 +367,7 @@ remove notification json object and send data in "data" jsonobject from the push
 Ran some steps : 
 1. Internet permissions are merged in manifest by firebase messaging, so even if the app doesnt hold a internet permission.
 
-Android Q 
+Android Q / 10 - API 29
 ========================================================
 Privacy Changes 
 https://developer.android.com/about/versions/10/privacy
