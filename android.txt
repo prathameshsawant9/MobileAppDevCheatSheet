@@ -322,6 +322,13 @@ Fragment1, Fragment2, Fragment3{
 	}
 }
 
+Fragment Good Pratices 
+========================================================
+viewModel.livedata.observe( , new callback())
+viewlifecycle.Owner 	=> correct way 
+this 			=> wrong way 
+
+since the viewmodel persists, new instance is passed when fragment detachs and reattaches because onCreateView is called again.
 
 Work Manager 
 ========================================================
