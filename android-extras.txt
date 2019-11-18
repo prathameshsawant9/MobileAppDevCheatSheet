@@ -42,9 +42,19 @@ interface EmployeeDao{
   @Query("SELECT * FROM EMPLOYEE LIMIT :limit")
   fun(limit: Int) : List<Employee>
   
-  @Insert
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  fun(user: User) : Long
+  
   @Update 
   @Delete   
+  
+  @Transaction
+  fun upsert(user: User) {
+        long id = insert(obj);
+        if (id == -1) {
+            update(obj);
+        }
+  }
 }
 
 Database 
