@@ -44,6 +44,27 @@ and at some point activity A is killed to reclaim resources,
 activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, 
 the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle)
 
+Dangerous Permission
+========================================================
+Camera, GPS, Audio, Contacts, Storage, Read SMS
+
+Safe Permission
+========================================================
+Internet, WIFI, Bluetooth, etc 
+
+Runtime Permission 
+========================================================
+// API 23
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+	requestPermissions(perms, permsRequestCode);
+
+onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults){
+
+}
+
+// Show explanation 
+ActivityCompat.shouldShowRequestPermissionRationale()
+
 Fragment Lifecycle
 ========================================================
 onAttach		: called when fragment has been attached to an activity
