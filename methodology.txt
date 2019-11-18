@@ -1,0 +1,20 @@
+Agile
+========================================================
+
+Step 1 : cyclic of 1,2,3,4,5
+
+        Planning (1)
+        
+Testing (5)         Requirement Analysis (2)
+
+Building (4)        Designing (3)
+
+
+2-3 Months 
+
+again Step 1
+
+2-3 Months 
+
+again Step 1
+
