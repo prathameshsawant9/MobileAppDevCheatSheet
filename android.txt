@@ -506,6 +506,18 @@ GridLayoutManager(this, 2)
 
 StaggeredLayoutManager(this, StaggeredGridLayoutManager.VERTICAL)
 
+Pull to refresh 
+========================================================
+android.support.v4.widget.SwipeRefreshLayout{
+  ListView()
+}
+
+mySwipeRefreshLayout.setOnRefreshListener{
+  onRefresh(){
+    mySwipeRefreshLayout.setRefreshing(true);
+  }
+}
+
 Firebase 
 ========================================================
 Authentication 
