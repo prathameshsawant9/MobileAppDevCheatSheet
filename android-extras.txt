@@ -63,6 +63,8 @@ public abstract class CompanyDatabase extends RoomDatabase{
   public EmployeeDao getInstance(Context context){
     return Room.databaseBuilder(applicationContext, CompanyDatabase.class)
            .fallbackDestructiveMigrations()
+                      OR
+           .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_1_4)
            .build();
   }
   
