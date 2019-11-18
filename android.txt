@@ -8,6 +8,42 @@ onStop		: called when activity is no longer visible to the user.
 onRestart	: called after your activity is stopped, prior to start.
 onDestroy	: called before the activity is destroyed.
 
+Activity & Task Manifest
+========================================================
+activities are not loaded in vaccum, it is rather loaded in a unit called as task. Task maintains stack of activities
+and follows first in last out.
+
+onConfigChanges : 
+If you don't want new activities to be created, you can define onConfigChanges and then the orientation, so 
+onConfigurationChange{} method will be called in Activity in case of such event.
+
+standard(default) : creates new activity every time, irrespective of anything 
+singleTop : 
+makes sure the top is never duplicated, 
+example current stack -> A, B, C, D  
+1) load D again > it wont load a new one, but exisiting onNewIntent is called. 
+2) load B again > new stack will be A, B, C, D, B 
+singleTask : 
+creates a new task for activity if it doesnt exists. But will use the same if it already there. All new activity are loaded in the same task 
+single instance : 
+a single task holding the only activity is loaded. Rest all behaviour is similar to singleTask 
+Intent flags 
+FLAG_ACTIVITY_CLEAR_TOP -> clears top activity and calls onNewIntent for exisiting activtiy.
+
+Handling affinities (taskAffinity)
+========================================================
+The affinity indicates which task an activity prefers to belong to. 
+By default, all the activities from the same app have an affinity for each other. 
+So, by default, all activities in the same app prefer to be in the same task. 
+
+Activity Release 
+========================================================
+onSaveInstanceState
+For example, if activity B is launched in front of activity A, 
+and at some point activity A is killed to reclaim resources, 
+activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, 
+the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle)
+
 Fragment Lifecycle
 ========================================================
 onAttach		: called when fragment has been attached to an activity
@@ -26,6 +62,10 @@ Fragment
 To call fragments 
 with UI : findFragmentById()
 without UI : findFragmentByTag()
+
+Fragment 
+1. ChildFragment
+2. Navigations 
 
 Fragment Transaction 
 ========================================================
@@ -125,6 +165,22 @@ Fragment visibility check
 @Override
 setUserVisibleHint(){}
 
+layout.xml 
+------------
+CoordinatorLayout 
+	AppBarLayout 
+		Toolbar
+			TabLayout
+	ViewPager 
+				
+code 
+tabLayout.setupWithViewPager(viewPager(this is view and not adapter))		
+note: use nestedscrollview with cordinator layout for that scrolling effect.
+
+FileProvider 
+========================================================
+path & providers -> external path ; getUriFromFile ; only used to pass the URI in intent output of the camera 
+
 ConstrainLayout - Guidelines, Barriers, Chains and Groups
 ========================================================
 Ref: https://riggaroo.co.za/constraintlayout-guidelines-barriers-chains-groups/
@@ -164,24 +220,6 @@ ssl concept : sslSocketFactory, trustmanager, CipherSuite.TLS_ECDHE_ECDSA_WITH_A
 interceptor : http interceptor 
 converters  : gson.converter, scalar converter
 
-ViewPager / Tab Layout 
-========================================================
-layout.xml 
-------------
-CoordinatorLayout 
-	AppBarLayout 
-		Toolbar
-			TabLayout
-	ViewPager 
-				
-code 
-tabLayout.setupWithViewPager(viewPager(this is view and not adapter))		
-note: use nestedscrollview with cordinator layout for that scrolling effect.
-
-FileProvider 
-========================================================
-path & providers -> external path ; getUriFromFile ; only used to pass the URI in intent output of the camera 
-
 Live Data 
 ========================================================
 Generally, LiveData delivers updates only when data changes, and only to active observers. 
@@ -200,7 +238,7 @@ custom transformations can be implemented using MediatorLiveData
 
 setValue = call from MainThread ; postValue = call from Worker Thread
 
-Fragments to ViewModel 
+Fragments to ViewModel Communication
 ( Pushing events like toast message, etc from VM to Fragment )
 ========================================================
 ViewModel{
@@ -220,7 +258,7 @@ Fragment{
 	}
 }
 
-Activity to all fragments; 
+Activity to Fragment Communication 
 ========================================================
 But in most cases you don't need this because livedata generally updates everything, when changed in DB.
 
@@ -275,51 +313,6 @@ Android Q
 Privacy Changes 
 https://developer.android.com/about/versions/10/privacy
 No hardware details or IMEI number.
-
-Activity & Task 
-========================================================
-activities are not loaded in vaccum, it is rather loaded in a unit called as task. Task maintains stack of activities
-and follows first in last out.
-
-onConfigChanges : 
-If you don't want new activities to be created, you can define onConfigChanges and then the orientation, so 
-onConfigurationChange{} method will be called in Activity in case of such event.
-
-standard(default) : creates new activity every time, irrespective of anything 
-singleTop : 
-makes sure the top is never duplicated, 
-example current stack -> A, B, C, D  
-1) load D again > it wont load a new one, but exisiting onNewIntent is called. 
-2) load B again > new stack will be A, B, C, D, B 
-singleTask : 
-creates a new task for activity if it doesnt exists. But will use the same if it already there. All new activity are loaded in the same task 
-single instance : 
-a single task holding the only activity is loaded. Rest all behaviour is similar to singleTask 
-Intent flags 
-FLAG_ACTIVITY_CLEAR_TOP -> clears top activity and calls onNewIntent for exisiting activtiy.
-
-========================================================
-Handling affinities (taskAffinity)
-The affinity indicates which task an activity prefers to belong to. 
-By default, all the activities from the same app have an affinity for each other. 
-So, by default, all activities in the same app prefer to be in the same task. 
-
-========================================================
-onSaveInstanceState
-For example, if activity B is launched in front of activity A, 
-and at some point activity A is killed to reclaim resources, 
-activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, 
-the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle)
-
-Fragments 
-========================================================
-To call fragments 
-with UI : findFragmentById()
-without UI : findFragmentByTag()
-
-Fragment 
-1. ChildFragment
-2. Navigations 
 
 ========================================================
 Each of the options for preserving UI state vary along the following dimensions that impact the user experience:
@@ -539,51 +532,4 @@ onView(withId(R.id.save_task_fab)).perform(click())
 onView(withId(R.id.add_task_description_edit_text)).perform(replaceText("NEW DESCRIPTION"))
 onView(withId(R.id.task_detail_description_text)).check(matches(withText("DESCRIPTION")))
 
-Flutter 
-========================================================
-Dart 
-var, const, dynamic , String, int 
 
-
-Stateless & StatefulWidget 
-void main() => runApp(MyApp())
-MyApp extends StatelessWidget { build{ MaterialApp ( home: Scaffold ( appBar: AppBar(  ) body : Center( child : Text("Hello") )) ) } }
-Timer extends StatefulWidget { createState() => new TimerState() }
-TimerState extends State<TimerPojo> { build(  ) }
-
-State{ 
-	initState() -> loading/ initializtion 
-	build() -> { layout }
-}
-// refreshes the state 
-setState((){ // can change any of the value from state object })
-
-attributes : padding, margin 
-
-BoxDecoration, RoundedRectangleBorder
-Image.asset('assets/images/lake.jpg')
-MaterialButton( onPressed: (  ) )
-Container( height: , width: , )
-Column 
-Row
-Align( alignment: Alignment.centerRight )
-Center extends Align
-Text( "Hello World" , style : TextStyle( fontFamily: 'vtks_distress // filename', ) )
-
-Future concepts 
-Future<Void> loadDatabase async{
-	return await loadDb()
-}
-
-// Calling 
-loadDatabase().then({ void ->  })
-
-// Updating StatefulWidgets using stream 
-
-
-// Tabs 
-Needs a TabBarController: DefaultTabController
-TabBar {
-	tabs : [ Tab( child: Text("Tab 1 Head")), Tab( child: Text("Tab 2 Head")) ]
-	body : TabBarView( children: [ new Text("Tab 1 Body"), new Text("Tab 2 Body") ]) 
-}
