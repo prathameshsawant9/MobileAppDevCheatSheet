@@ -92,6 +92,35 @@ val adhoc = object {
 
 print(adhoc.x + adhoc.y)
 
+High Order Functions 
+========================================================
+functions accepting lambda functions as parameters
+
+fun display(condition: ()-> Boolean, val value: Int){
+  if(condition()) {
+    println("Hello")
+  }
+}
+
+// usage 
+display({ true }, 0)
+
+Closures 
+========================================================
+values that can be changed from the lambda functions 
+
+Predicates 
+========================================================
+Types               listOf(2,3,4,5,6,23,90)
+all   :Boolean      all{ it > 1 }   // Are all numbers greater than 1
+any   :Boolean      any{ it > 1 }   // Any number greater than 1
+count :Int                          // Returns number of elements greater than 1    
+find  :Boolean                      // Checks if the number exists 
+
+Example:
+listOf(2,3,4,5,6,23,90).all{ }.any{ } 
+
+
 Any vs *
 ========================================================
 List<*>  vs List<Any>
@@ -147,6 +176,12 @@ class A{
   }
 }
 
+Null Safety
+========================================================
+safe call           ?.
+elvis call          ?:
+non-null assertions !!
+
 Modifier 
 ========================================================
 For non-null variable which to be initialized at later stage 
@@ -156,8 +191,8 @@ The modifier can only be used on var properties declared inside the body of a cl
 
 Lateinit vs Lazy 
 ========================================================
-lazy can only be used on val
-lateinit can only be used on var
+lazy can only be used on val, is used to save memory
+lateinit can only be used on var, must be initialized before use.
 
 Delegation 
 ========================================================
