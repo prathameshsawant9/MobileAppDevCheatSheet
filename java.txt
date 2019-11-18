@@ -1,26 +1,38 @@
 Abstract
+========================================================
 contains both concrete and abstract methods
 
 Interface 
+========================================================
 blueprint/contract of a class
 
 Composition (has-a relationship)
+========================================================
 Person {
    // Person has a job 
    Job jb;
 }
 
 Inheritance 
+========================================================
 Animal {}
 Cat extends Animal {}
 
+Lower Bound / Supertype & Upper Bound / Subtype 
+========================================================
+lower =>  ? super Integer
+upper =>  ? extends Integer
+
+
 Overloading (static polymorphism)
+========================================================
 Printer{
    void display();
    void display(String message);
 }
 
 Overriding (dynamic polymorphism)
+========================================================
 Printer{
    void print();
 }
@@ -31,6 +43,7 @@ DeskJetPrinter extends Printer{
 }
 
 Overloading & Overriding - A different example 
+========================================================
 Printer {
    static print() { sop("Static method of Printer") }
    printTest() { sop("Instance method of Printer") }
@@ -58,48 +71,57 @@ Static method of Printer
 Instance method of DeskJetPrinter
 
 Access Modifiers 
+========================================================
 private, protected, default & public 
 
 Design Patterns 
+========================================================
 Creational (builders, factory, Singleton, Monostate, Fluent Interface Patterns)
 Structural (adapter, decorator, facade)
 Behavioural(chain of responsibility, iterator & strategy)
 
 Variables
+========================================================
 Local = methods 
 Instance = declared in class 
 class = marked static
 
 transient
+========================================================
 any object marked with this keyword will not be serialized
 
 volatile 
+========================================================
 no caching in cpu, reads directly from memory 
 
 final, finally and finalize
+========================================================
 class MemoryClass {
    public void finalize(){ sop("will be called during GC") }
 }
 
-
-
 syncronized 
+========================================================
 when multiple threads are accessing one object, each should access it one at a time. 
 
 ThreadPoolExecutor
+========================================================
 creates a pool where thread can be executed and checked.
 ThreadPoolExecutor returns a future object so which can be basically used to cancel the task. 
 
 AtomicBoolean (used in concurrency)
+========================================================
 compare(), compareAndSet()
 
 Primitive & Wrapper 
+========================================================
 primitive -> boolean, byte, char, short, int, long, float and double
 wrapper   -> Boolean, Byte, Character, Short, Integer, Long, Float and Double
 
 Autoboxing & unboxing 
 
 Defaults 
+========================================================
 boolean defaults to false;
 byte defaults to 0;
 short defaults to 0;
@@ -113,17 +135,18 @@ object defaults to null
 int a // Initialized variable
 a = 9 // Instantiation 
 
-
-
 String 
+========================================================
 The String class is immutable, so that once it is created a String object cannot be changed,
 inorder to prevent malicious manipulation of data.
 
 String Constant Pool
+========================================================
 When string is assigned value using "", it looks into the String Pool Constant. 
 If the value exists same reference is returned else a new Constant is created and referenced is returned.
 
 Heap Space vs String Constant Pool 
+========================================================
 Heap Space - A space which holds objects created using new keyword 
 Constant Pool - A space which holds string objects created with double quotes and non repitive 
 
@@ -154,43 +177,54 @@ print(s1 .equals s2) => true  // comparing values
 print(s2 == s3) => true       // since both are refering to same refernce which is coming from SCP 
 
 StringBuffer 
+========================================================
 Slow and thread safe
 
 StringBuilder 
+========================================================
 Fast and non thread safe
 
-
 Collections & Generics 
+========================================================
 Arrays, ArrayLists, HashSet, TreeSet, HashMap, HashSet, Stack, Queues.
 
 Enumeration (forward only)
+========================================================
 Used with legacy objects, can only read through elements and cannot make changes (add/remove)
 
 Iterator (forward only)
+========================================================
 Can be used with any Collections objects and rest is same as above
 
 ListIterator (both direction)
+========================================================
 can add/remove and travese in both direction with any list
 
 HashSet (no order)
+========================================================
 No duplicates, can accept single null value  
 ex: HashSet {“Hello”, “Hi”, “Bye”, “Run”}
 
 TreeSet (in order) 
+========================================================
 same as above 
 
 HashMap (no order)
+========================================================
 No duplicates, can accept single null as key 
 works with key & value.
 ex: HashMap {1->”Hello”, 2->”Hi”, 3->”Bye”, 4->”Run”}
 
 TreeMap (ascending order by keys)
+========================================================
 same as above 
 
 LinkedHashMap (maintains link order)
+========================================================
 same as above 
 
 Stack 
+========================================================
 Stack => [Jack, Queen, King, Ace]
 push(Leo)
 pop() => Leo
@@ -198,9 +232,11 @@ peek() => Ace
 Current Stack => [Jack, Queen, King]
 
 Queue (FIFO)
+========================================================
 add, peek, remove(removes the head)
 
 CountDownLatch
+========================================================
 when you are working with multiple thread and you want them to flag you when they finish or 
 want to hold the block of execution until all finish. 
 
