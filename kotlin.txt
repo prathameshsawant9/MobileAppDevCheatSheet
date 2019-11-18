@@ -3,6 +3,28 @@ Kotlin
 classes & methods are by default 
 "public final " in nature 
 
+Loops 
+========================================================
+if (x in 1..y+1)
+if (-1 !in 0..list.lastIndex)
+
+for (item in items)
+for (index in items.indices)
+for (x in 1..5)
+for (x in 1..10 step 2)
+for (x in 9 downTo 0 step 3)
+for (i in 1 until 10) // 10 is excluded 
+
+while (index < items.size)
+
+when (obj) {
+  1          -> "One"
+  "Hello"    -> "Greeting"
+  is Long    -> "Long"
+  !is String -> "Not a string"
+  else       -> "Unknown"
+}
+
 Constructors 
 ========================================================
 class Customer(name: String, val type: String)
@@ -75,8 +97,6 @@ Bivariance
 input		    :	  Parent<Parent>
 acceptable	: 	GrandParent, Parent, BabyChild
 
-Constructor
-========================================================
 
 Object of Anonymous class 
 ========================================================
@@ -120,6 +140,25 @@ find  :Boolean                      // Checks if the number exists
 Example:
 listOf(2,3,4,5,6,23,90).all{ }.any{ } 
 
+Type check 
+========================================================
+if (obj is String)
+
+Collections - Mutable vs Immutable 
+========================================================
+immutableList
+listOf("one", "two", "one")
+setOf("one", "two", "one")
+
+vs 
+mutableListOf<String>()
+
+val fruits = listOf("banana", "avocado", "apple", "kiwifruit")
+fruits
+  .filter { it.startsWith("a") }
+  .sortedBy { it }
+  .map { it.toUpperCase() }
+  .forEach { println(it) }
 
 Any vs *
 ========================================================
