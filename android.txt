@@ -159,6 +159,43 @@ Back button pressed 				: C Fragment-Stop
 Back button pressed 				: A Fragment-Stop		: Activity visible 
 Back button pressed 				: Activity Finishes						
 
+Pop back stack 
+========================================================
+if (manager.popBackStackImmediate( fragmentName )){
+  // Cleared the stack
+}else{
+  // It was not there in the stack, so create the fragment
+}
+
+Fragment Communication
+========================================================
+getSupportFragmentManager().findFragmentById() (.callAnythingFromActivity)
+
+OR
+
+interface NotifyFragment{
+  void refresh(){}
+}
+
+Activity {
+  NotifyFragment listener;
+}
+
+FragmentA implements NotifyFragment{
+  refresh(){
+  
+  }
+
+  onAttach(){ activity.listener = this }	
+  onDetach(){ activity.listener = null }	
+}
+
+FragmentB {
+  onViewCreated(){
+     activity.listener?.refresh()
+  }	
+}
+
 View Pager 
 ========================================================
 Fragment visibility check 
@@ -237,6 +274,14 @@ Transformations.map => similar to RxJava map
 custom transformations can be implemented using MediatorLiveData 
 
 setValue = call from MainThread ; postValue = call from Worker Thread
+
+ViewModel Init
+========================================================
+ViewModelProviders.of(context).get(MyViewModel::class.java)
+
+// custom factory 
+val viewmodelFactory = MyViewModelFactory(applicationContext)
+ViewModelProviders.of(context, viewmodelfactory).get(MyViewModel::class.java)
 
 Fragments to ViewModel Communication
 ( Pushing events like toast message, etc from VM to Fragment )
@@ -334,6 +379,7 @@ Read/write time 			quick (memory access only) 	slow 			slow (requires disk acces
 									serialization
 									& deserialization
 									and disk access) 	 
+MVVM 									
 ========================================================									
 MVVM Plain [can only be implemented using]
 	- Data Binding 
