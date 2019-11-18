@@ -21,7 +21,109 @@ onDestroyView		: called when its time for fragment to destory the UI
 onDestroy		: called to indicate final cleanup from the fragment is released 
 onDetach		: called when fragment is disassociated from its hosting activity
 
+Fragment
+========================================================
+To call fragments 
+with UI : findFragmentById()
+without UI : findFragmentByTag()
 
+Fragment Transaction 
+========================================================
+addToBackStack	: just remembers the transaction 
+replace		: replaces existing fragment 				// All fragments are not alive
+add		: adds a fragment (are added to the same container)	// All fragments are alive 
+
+Activity-Start 	: onCreate, onStart, onResume
+Activity-Stop 	: onPause, onStop, onDestroy
+
+Fragment-Start	: onAttach, onCreate, onCreateView, onActivityCreated, onStart, onResume
+Fragment-Stop 	: onPause, onStop, onDestroyView, onDestroy, onDetach
+
+Fragment Transaction Cases 
+========================================================
+
+** Add & remove
+
+Activity-Start
+add 			Fragment A 		: A Fragment-Start		: A is visible 
+add 			Fragment B 		: B Fragment-Start 		: B is visible 
+add 			Fragment C 		: C Fragment-Start		: C is visible 
+remove 			Fragment C		: C Fragment-Stop		: B is visible 
+
+Back button pressed				: Activity Finishes
+
+** Add & replace
+
+Activity-Start
+add 			Fragment A 		: A Fragment-Start		: A is visible 
+add 			Fragment B 		: B Fragment-Start 		: B is visible 
+replace			Fragment C 		: [B->A] Fragment-Stop 
+						: C Fragment-Start		: C is visible
+
+Back button pressed 				: Activity Finishes
+
+** Add & remove (using backstack)
+
+Activity-Start
+add + addToBackStack	Fragment A 		: A Fragment-Start		: A is visible 
+add + addToBackStack	Fragment B 		: B Fragment-Start 		: B is visible 
+add + addToBackStack	Fragment C 		: C Fragment-Start		: C is visible 
+remove + addToBackStack	Fragment C		: C Fragment-Stop		: B is visible 
+
+Back button pressed 				: B Fragment-Stop		: C is Visible 
+Back button pressed 				: C Fragment-Stop		: B is Visible 
+Back button pressed 				: B Fragment-Stop		: A is Visible 
+Back button pressed 				: A Fragment-Stop		: Nothing visible 
+Back button pressed 				: Activity Finishes
+
+** Add, replace & remove (using backstack)
+
+Activity-Start
+add + addToBackStack	Fragment A 		: A Fragment-Start		: A is visible 
+add + addToBackStack	Fragment B 		: B Fragment-Start 		: B is visible 
+replace +addToBackStack Fragment C		: [B->A] Fragment-Stop		 
+						: C Fragment-Start		: C is visible
+remove + addToBackStack Fragment C		: C Fragment-Stop		: ACTIVITY visible
+
+Back button pressed 				: C Fragment-Start		: C is Visible 
+Back button pressed 				: C Fragment-Stop		
+						: [A->B] Fragment-Stop		: B is Visible 
+Back button pressed 				: B Fragment-Stop		: A is Visible 
+Back button pressed 				: A Fragment-Stop		: Nothing visible 
+Back button pressed 				: Activity Finishes
+
+** Add & remove (using backstack OPTIONALY)
+
+Activity-Start
+add + addToBackStack	Fragment A 		: A Fragment-Start		: A is visible 
+add (without backstack)	Fragment B 		: B Fragment-Start 		: B is visible 
+add (without backstack) Fragment C 		: C Fragment-Start		: C is visible 
+remove (without)	Fragment C		: C Fragment-Stop		: B is visible
+
+Back button pressed 				: [B->A] Fragment-Stop		: Activity visible 
+Back button pressed 				: Activity Finishes
+
+** Add, replace & remove (using backstack OPTIONALY)
+
+Activity-Start
+add + addToBackStack 	Fragment A		: A Fragment-Start		: A is visible 
+add (without backstack)	Fragment B 		: B Fragment-Start 		: B is visible 
+replace +addToBackStack Fragment C		: [B->A] Fragment-Stop	
+						: C Fragment-Start		: C is visible
+remove + addToBackStack	Fragment C		: C Fragment-Stop		: Activity visible 
+
+Back button pressed 				: C Fragment-Start		: C is visible
+Back button pressed 				: C Fragment-Stop		
+						: // nothing to do for B since it was not in stack 
+						: A Fragment-Start		: A is visible
+Back button pressed 				: A Fragment-Stop		: Activity visible 
+Back button pressed 				: Activity Finishes						
+
+View Pager 
+========================================================
+Fragment visibility check 
+@Override
+setUserVisibleHint(){}
 
 ConstrainLayout - Guidelines, Barriers, Chains and Groups
 ========================================================
