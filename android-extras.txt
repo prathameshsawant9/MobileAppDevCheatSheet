@@ -16,3 +16,49 @@ class YourLiveWallpaper extends WallpaperService{
   }
 }
 
+Room - JetPack
+========================================================
+Types
+Entity    : Represents a table within the database
+Dao       : DAOs are responsible for defining the methods that access the database
+Database  : Contains the database holder and serves as the main access point
+
+@Entity( tableName = "", foreignKeys = "", indices = "" ) - every model class for Room 
+class Employee{
+  @PrimaryKey(autoGenerate = true)
+  int empId
+  
+  @ColumnInfo(name = “column_name”)
+  String name;
+  
+  @Ignore — field will not be persisted by Room
+  String type;
+  
+  @Embeded — nested fields can be referenced directly in the SQL queries.
+}
+
+DAO 
+interface EmployeeDao{
+  @Query("SELECT * FROM EMPLOYEE LIMIT :limit")
+  fun(limit: Int) : List<Employee>
+  
+  @Insert
+  @Update 
+  @Delete   
+}
+
+Database 
+@Database()
+public abstract class CompanyDatabase extends RoomDatabase{
+  public EmployeeDao getInstance(Context context){
+    return Room.databaseBuilder(applicationContext, CompanyDatabase.class)
+           .fallbackDestructiveMigrations()
+           .build();
+  }
+  
+  
+  public abstract EmployeeDao employeeDao()
+}
+  
+  
+
