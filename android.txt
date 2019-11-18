@@ -384,6 +384,19 @@ WorkManager.getInstance()..getWorkInfoByIdLiveData(requestId).observe(this, onUp
 	int value = progress 
 })
 
+Handler 
+========================================================
+= new Handler(Looper.getMainLooper()) { 
+   public void handleMessage(Message msg) { 
+        // process incoming messages here
+       // this will run in non-ui/background thread
+   } 
+}; 
+
+// Usage 
+handler.message(data)
+handler.postMessage(data)
+
 Firebase Push Notifications 
 ========================================================
 - Payload size 4KB 
@@ -521,6 +534,20 @@ Types
 	.subscribe{ MaybeObserver { onSuccess onError onComplete } }
 5. Completable
 	.subscribe{ CompletableObserver { onComplete onError } }
+	
+Types of Schedulers
+1. computation 
+for computation work 
+
+2. io 
+for io work 
+
+3. newThread
+new thread is created 
+
+4. trampoline 
+work is managed in queue manner. FIFO 
+
 	
 Operators 
 1. Filter   		-> filters out stuff at defined 
