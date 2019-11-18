@@ -85,4 +85,18 @@ new Migration(1, 2) {
 };
   
   
+SignalR Android
+========================================================
+= new HubConnection("YOUR CONNECTION NAME")
+mHubConnection.createHubProxy(SERVER_HUB_CHAT)
+mHubConnection.start(clientTransport)
+
+// Receiver methods at client side 
+mHubProxy.on("clientBroadcast_android", new SubscriptionHandler1<CustomMessage>{
+
+});
+
+// Calling methods on server 
+mHubProxy.invoke("hello_server_method", message);
+
 
