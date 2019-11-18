@@ -58,7 +58,7 @@ interface EmployeeDao{
 }
 
 Database 
-@Database()
+@Database(entities = {User.class}, version = 1)
 public abstract class CompanyDatabase extends RoomDatabase{
   public EmployeeDao getInstance(Context context){
     return Room.databaseBuilder(applicationContext, CompanyDatabase.class)
@@ -69,6 +69,14 @@ public abstract class CompanyDatabase extends RoomDatabase{
   
   public abstract EmployeeDao employeeDao()
 }
+
+new Migration(1, 2) {
+    @Override
+    public void migrate(SupportSQLiteDatabase database) {
+        // Since we didn't alter the table, 
+        // there's nothing else to do here.
+    }
+};
   
   
 
