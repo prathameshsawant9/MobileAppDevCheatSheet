@@ -18,6 +18,12 @@ setState((){ // can change any of the value from state object })
 
 attributes : padding, margin 
 
+ListView.builder(
+ itemCount: europeanCountries.length,
+ itemBuilder: (context, index) {
+   return ListTile( title: Text(europeanCountries[index]) );
+ })
+
 BoxDecoration, RoundedRectangleBorder
 Image.asset('assets/images/lake.jpg')
 MaterialButton( onPressed: (  ) )
