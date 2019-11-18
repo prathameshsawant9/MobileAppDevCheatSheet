@@ -497,6 +497,15 @@ Presenter (logic)
 Entity (data)
 Routing (business flow)
 
+Recylerview Patterns
+========================================================
+LinearLayoutManager(this)
+layoutManager.orientation = LinearLayoutManager.HORIZONTAL || LinearLayoutManager.VERTICAL 
+
+GridLayoutManager(this, 2)
+
+StaggeredLayoutManager(this, StaggeredGridLayoutManager.VERTICAL)
+
 Firebase 
 ========================================================
 Authentication 
