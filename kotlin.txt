@@ -1,5 +1,62 @@
-Variances concept 
+Kotlin 
+========================================================
+classes & methods are by default 
+"public final " in nature 
 
+Constructors 
+========================================================
+class Customer(name: String, val type: String)
+
+name    => just parameters and cant be used outside the method scope.
+type    => is a declared variable and can be used anywhere in the class scope.
+
+class Customer (1)constructor(name: String){
+  
+        constructor(type: Int): (2) this("leo"){}
+        constructor(type: HashMap): (2) this("leo"){}
+    (3) constructor(type: ArrayList): (2) this("leo"){}
+    
+    init{}
+}
+
+(1) => not compulsory 
+(2) => needs be to call if primary constructor exists
+(3) => can have multiple constructor 
+
+Interface 
+========================================================
+all methods and properties are public open, but not final 
+
+interface One{
+  fun click()
+}
+
+interface Two{
+  fun click()
+}
+
+class Implementation : One, Two{
+
+  // compulsory to overide coz of ambiguity
+  click(){
+    super<One>.click()
+    super<Two>.click()
+  }
+}
+
+== operators 
+========================================================
+for normal class c1, c2
+
+c1 == c2 // checks reference 
+
+for data class d1, d2 
+
+d1 == d2 // compares the values within the class 
+
+
+Variances concept 
+========================================================
 BabyChild extends Parent extends GrandParent
 
 Covariance
@@ -18,8 +75,117 @@ Bivariance
 input		    :	  Parent<Parent>
 acceptable	: 	GrandParent, Parent, BabyChild
 
-Scope Functions Kotlin: 
+Constructor
+========================================================
 
+Object of Anonymous class 
+========================================================
+setClickListener( object: ClickListener {
+
+
+})
+
+val adhoc = object {
+  var x: Int = 0
+  var y: Int = 0
+}
+
+print(adhoc.x + adhoc.y)
+
+Any vs *
+========================================================
+List<*>  vs List<Any>
+
+List<String>  => will accept only string 
+List<Any>     => will accept anything Integer, String, etc
+
+Singleton 
+========================================================
+Way 1 : 
+
+object Printer{
+  val id: Int = 1
+  fun display()
+}
+
+// calling
+Printer.display()
+Printer.id 
+
+Way 2 :
+
+class Printer {
+  companion object{
+    fun display()
+  }
+  
+  object FakeCompanion{
+    fun displayTest()
+  }
+}
+
+// Difference is in calling from Java
+Printer.Companion.display()
+Printer.FakeCompanion.Instance.displayTest()
+
+
+// Singleton & Inheritance 
+open class Client(){
+  fun display()
+}
+
+object Browser: Client()
+
+// usage 
+Browser.display()
+
+Inner class
+========================================================
+class A{
+  inner class Inner{
+  
+  }
+}
+
+Modifier 
+========================================================
+For non-null variable which to be initialized at later stage 
+
+lateinit - can only be used on var 
+The modifier can only be used on var properties declared inside the body of a class (not in the primary constructor)
+
+Lateinit vs Lazy 
+========================================================
+lazy can only be used on val
+lateinit can only be used on var
+
+Delegation 
+========================================================
+can be achived using "by" clause 
+
+var p: String by Delegate()
+
+By Clause
+========================================================
+interface Base{
+  fun print()
+}
+
+class BaseImplementation(val x:Int) : Base{
+  @overide 
+  fun print() = print("hello")
+}
+
+class Derived(b: Base) : Base by b 
+
+// Usage 
+fun main(){
+  val bi = BaseImpl(10)
+  Derived(bi).print()
+}
+
+Scope Functions Kotlin: 
+========================================================
                 (returns)
 let 	= it 	  : lambda result 
 also 	= it 	  : context object 
