@@ -221,25 +221,13 @@ safe call           ?.
 elvis call          ?:
 non-null assertions !!
 
-Modifier 
-========================================================
-For non-null variable which to be initialized at later stage 
-
-lateinit - can only be used on var 
-The modifier can only be used on var properties declared inside the body of a class (not in the primary constructor)
-
-Lateinit vs Lazy 
-========================================================
-lazy can only be used on val, is used to save memory
-lateinit can only be used on var, must be initialized before use.
-
 Delegation 
 ========================================================
 can be achived using "by" clause 
 
 var p: String by Delegate()
 
-By Clause
+Delegation using By-clause
 ========================================================
 interface Base{
   fun print()
@@ -258,6 +246,26 @@ fun main(){
   Derived(bi).print()
 }
 
+Delegation Properties
+========================================================
+by lazy()
+val lazyValue: String by lazy {
+    println("computed!")
+    "Hello"
+}
+
+Modifier 
+========================================================
+For non-null variable which to be initialized at later stage 
+
+lateinit - can only be used on var 
+The modifier can only be used on var properties declared inside the body of a class (not in the primary constructor)
+
+Lateinit vs Lazy 
+========================================================
+lazy can only be used on val, is used to save memory
+lateinit can only be used on var, must be initialized before use.
+
 Scope Functions Kotlin: 
 ========================================================
                 (returns)
@@ -268,3 +276,17 @@ apply = this  : context object
 run 	= this 	: lambda result 
 
 shorthand = lal-war
+
+Extension Functions 
+========================================================
+
+Odd Scenario 
+class Example {
+    fun printFunctionType() { println("Class method") }
+}
+
+fun Example.printFunctionType() { println("Extension function") }
+fun Example.printFunctionType(i: Int) { println("Extension function") }
+
+Example().printFunctionType()   // output : Class method 
+Example().printFunctionType(1)  // output : Extension function
