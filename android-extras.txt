@@ -1,3 +1,7 @@
+Security 
+APK Tampering
+Token Based -> IP address of the device 
+
 StaticLayout 
 used to draw text on canvas with autowrapping facility, 
 because canvas.drawText doesn't considers the bounds and so the text is off the screen. 
