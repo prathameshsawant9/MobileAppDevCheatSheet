@@ -321,6 +321,10 @@ ViewModel Init
 ========================================================
 ViewModelProviders.of(context).get(MyViewModel::class.java)
 
+ViewModelLifecycle 
+ViewModel scope [onCreate upto onDestroy]
+ViewModel.onCleared() called after onDestroy
+
 // custom factory 
 val viewmodelFactory = MyViewModelFactory(applicationContext)
 ViewModelProviders.of(context, viewmodelfactory).get(MyViewModel::class.java)
@@ -344,6 +348,12 @@ Fragment{
 		}
 	}
 }
+
+Receiver Manifest vs Activity Lifecyle 
+========================================================
+Manifest : If your receiver is registered in the manifest, and your app is not running, a new process will be created to handle the broadcast.
+
+Activity : If you register it in code, it's tied to the life of the activity/service you registered it in.
 
 Activity to Fragment Communication 
 ========================================================
