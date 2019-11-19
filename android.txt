@@ -5,8 +5,12 @@ onStart		: called when activity is becoming visible to the user.
 onResume	: called when activity will start interacting with the user.
 onPause		: called when activity is not visible to the user.
 onStop		: called when activity is no longer visible to the user.
-onRestart	: called after your activity is stopped, prior to start.
+onRestart	: called after your activity is stopped, prior to start. 
+		  Also called when rotated with new instance of activity
 onDestroy	: called before the activity is destroyed.
+
+** onDestroy can be called without onPause and onStop, if finish is called in onCreate()
+
 
 Activity & Task Manifest
 ========================================================
@@ -97,6 +101,10 @@ Fragment
 To call fragments 
 with UI : findFragmentById()
 without UI : findFragmentByTag()
+
+Passing values in constructor vs values in bundle
+Note: Values to fragment should only be passed using Bundle, because when fragment is retained by the activity, 
+values passed in constructor would be lost.
 
 Fragment 
 1. ChildFragment
@@ -248,6 +256,14 @@ CoordinatorLayout
 code 
 tabLayout.setupWithViewPager(viewPager(this is view and not adapter))		
 note: use nestedscrollview with cordinator layout for that scrolling effect.
+
+Sparse Array vs Array 
+========================================================
+he purpose of a SparseArray is to save memory 
+if you have a list that has lots of gaps in. If you only have 10 items, 
+and the numbers that index them range from 0 to 1000,
+then an ArrayList will have lots of null entries in it
+
 
 FileProvider 
 ========================================================
