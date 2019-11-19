@@ -44,6 +44,20 @@ and at some point activity A is killed to reclaim resources,
 activity A will have a chance to save the current state of its user interface via this method so that when the user returns to activity A, 
 the state of the user interface can be restored via onCreate(Bundle) or onRestoreInstanceState(Bundle)
 
+Keeping Activity - Config Changes 
+========================================================
+Activity.onConfigurationChanged() 
+can be used as callback when the specified config in the manifest occurs 
+configChange="orientation"
+
+New activity is not created but rather onConfigurationChange is called and there the developer can 
+call setContentView( layout ) if he/she wants to keep the activity and just rotate the view.
+
+Passing data back from B -> A 
+========================================================
+setResult( Activity.RESULT_OK, new Intent().putExtra() );
+finish();
+
 Dangerous Permission
 ========================================================
 Camera, GPS, Audio, Contacts, Storage, Read SMS
