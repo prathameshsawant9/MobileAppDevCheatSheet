@@ -3,6 +3,13 @@ Kotlin
 classes & methods are by default 
 "public final " in nature 
 
+Visibility Modifier
+========================================================
+private       : same as java 
+protected     : same as java 
+internal      : same as java default // accessible in the same module
+public        : same as java 
+
 Loops 
 ========================================================
 if (x in 1..y+1)
