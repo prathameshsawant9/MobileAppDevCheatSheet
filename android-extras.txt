@@ -1,11 +1,15 @@
 Security 
+========================================================
 APK Tampering
 Token Based -> IP address of the device 
 
 StaticLayout 
+========================================================
 used to draw text on canvas with autowrapping facility, 
 because canvas.drawText doesn't considers the bounds and so the text is off the screen. 
 
+Live Wallpaper 
+========================================================
 LiveWallaper (Create)
 class YourLiveWallpaper extends WallpaperService{
   constructor{
@@ -19,6 +23,14 @@ class YourLiveWallpaper extends WallpaperService{
     staticLayout.draw(canvas)
   }
 }
+
+View Stub 
+========================================================
+A ViewStub is an invisible, zero-sized View that can be used to lazily inflate layout resources at runtime
+
+ViewStub stub = new ViewStub(this);
+stub.setLayoutResource(R.layout.mySubTree);
+View replacedView = stub.inflate(); 
 
 Room - JetPack
 ========================================================
@@ -98,5 +110,7 @@ mHubProxy.on("clientBroadcast_android", new SubscriptionHandler1<CustomMessage>{
 
 // Calling methods on server 
 mHubProxy.invoke("hello_server_method", message);
+
+
 
 
