@@ -24,6 +24,22 @@ class YourLiveWallpaper extends WallpaperService{
   }
 }
 
+Fitting for phones & tabs 
+========================================================
+phones dp           = 1 dp 
+7   inch tablet     = 1.5 dp
+10  inch tablet     = 2 dp 
+
+Service vs Intent Service 
+========================================================
+Service         : runs on main thread, so any task needs to be executed in the background.
+Intent Service  : runs on background thread and process one intent at a time. 
+
+Build Process
+========================================================
+build type { uat, debug, release }
+productflavours + dimension { client1, client2 }
+
 View Stub 
 ========================================================
 A ViewStub is an invisible, zero-sized View that can be used to lazily inflate layout resources at runtime
@@ -34,9 +50,20 @@ View replacedView = stub.inflate();
 
 GSON 
 ========================================================
+class pojo{
+  @SerializedName("ID")
+  val id: Int
+}
 
+// Direct Object 
+People peoplea    = gson.fromJson(jsonArray.toString(), People.class)
 
-Multiple Recylerview Layouts
+// Direct List 
+Type listType     = new TypeToken<List<Post>>(){}.getType();
+List<Post> posts  = gson.fromJson(jsonOutput, listType)
+
+Multiple Recylerview Layouts (getItemViewType, onCreateViewHolder, onBindViewHolder)
+ItemTouchListener, ItemAnimator 
 ========================================================
 public int getItemViewType(int position) {
    return position % 2 * 2;
@@ -62,6 +89,13 @@ public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int pos
       break
   }
 }
+
+// Click listerner 
+// coupled in onBindViewHolder
+view.setOnClickListener(mOnClickListener)
+
+// less coupled 
+recyclerView.addOnItemTouchListener()
 
 Room - JetPack
 ========================================================
