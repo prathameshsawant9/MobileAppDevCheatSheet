@@ -424,6 +424,19 @@ WorkManager.getInstance()..getWorkInfoByIdLiveData(requestId).observe(this, onUp
 	int value = progress 
 })
 
+// Constraints for WorkManager
+Constraints.Builder builder = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED);
+
+// Basic Structure 
+extends Worker{
+  doWork(){
+    return 
+    Result.success(),  // complete
+    Result.retry(),    // asking to retry 
+    Result.failure()   // asking to stop 
+  }
+}
+
 Handler 
 ========================================================
 = new Handler(Looper.getMainLooper()) { 
@@ -624,7 +637,7 @@ Operators
 	output-> [fx]
 		
 7. ConcatMap -> same as FlatMap but preserves order		
-    output-> [ax, bx, cx, dx, ex, fx]
+    	output-> [ax, bx, cx, dx, ex, fx]
 
 8. ThrottleLast( time-window: 1 sec ) 
 	input -> ( a,b,c,d,e,f )
