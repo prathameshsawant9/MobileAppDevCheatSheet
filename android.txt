@@ -456,6 +456,24 @@ Firebase Push Notifications
 - When application is in foreground you have to override on message received
 - When application is in background, it calls default notification and on click opens the launcher activity
 
+// gives you the token for your backend service
+extends MyFirebaseInstanceService {
+
+  // different when user uninstall and reinstalls the application 
+  onTokenRefresh(){
+    // token stuff 
+    String refreshedToken = FirebaseInstanceId.getInstance().getToken()
+  }
+}
+
+// gives you the notification 
+extends MyFirebaseMessagingService {
+  onMessageReceived(RemoteMessage remoteMessage){
+     super.onMessageReceived(remoteMessage);
+     // add your notification code
+  }	
+}
+
 remove notification json object and send data in "data" jsonobject from the push json to deliver the message even when the app is killed.
 
 Ran some steps : 
