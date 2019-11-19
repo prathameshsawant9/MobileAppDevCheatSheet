@@ -62,7 +62,11 @@ execute: Left outer join
 4 -> data 
 5 -> null 
 
-
+Queries 
+========================================================
+ALTER TABLE table_name ADD    column_name datatype; 
+ALTER TABLE table_name DROP   column_name datatype; 
+ALTER TABLE table_name MODIFY column_name datatype; 
 
 
 
