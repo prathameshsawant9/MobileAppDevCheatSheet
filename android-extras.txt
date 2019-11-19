@@ -32,6 +32,37 @@ ViewStub stub = new ViewStub(this);
 stub.setLayoutResource(R.layout.mySubTree);
 View replacedView = stub.inflate(); 
 
+GSON 
+========================================================
+
+
+Multiple Recylerview Layouts
+========================================================
+public int getItemViewType(int position) {
+   return position % 2 * 2;
+}
+
+public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+  switch (viewType) {
+    case 0: return new ViewHolder0(...)
+    case 1: return new ViewHolder0(...)
+  }
+}
+
+public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+  switch (holder.getItemViewType()) {
+    case 0: 
+      ViewHolder0 viewHolder0 = (ViewHolder0)holder;
+      ....
+      break
+      
+    case 1: 
+      ViewHolder1 viewHolder1 = (ViewHolder1)holder;
+      ....
+      break
+  }
+}
+
 Room - JetPack
 ========================================================
 Types
