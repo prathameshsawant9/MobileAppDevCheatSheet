@@ -1,0 +1,72 @@
+Kotlin co-rountines
+========================================================
+Dispatchers: 
+IO      : network and disk related work 
+Default : cpu intensive work
+Main    : ui thread
+
+Suspend function: 
+Any function declared with "suspend" can be started, paused and resumed. 
+This function can only be called by another suspend function.
+
+Kotlin corountines calling functions: 
+launch(): Job          // join ()
+async() : Deferred<T>  // await() behaves similar to Future of java, which can be 
+
+launch vs async
+========================================================
+launch  : should be used when the result doesnt matter only execution is important
+          any exception occuring inside the launch function is treated as uncaught exception.
+          if child crashes it cancels the parent
+          join is used to wait for completion 
+         
+async   : should be used when the result is important
+          any exception thrown in the execution is stored in the result object and can be ignored or handled as per logic
+          await() is used to wait for the result 
+         
+         
+Usage         
+========================================================
+1. 
+val launchScope = GlobalScope.launch(Dispatchers.IO){ // your code  }
+
+2.
+val asyncScope  = GlobalScope.async(Dispatchers.IO){ // your code  }
+asyncScope.await()
+
+---
+OR 
+---
+
+// dont have to call await, it is called by default. Also this method is a suspend function 
+val asyncScope  = withContext(Dispatchers.IO){ // your code }
+
+3. 
+class MainActivity : AppCompatActivity(), CoroutineScope{
+  override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
+  private lateinit var job: Job
+  
+  onCreate()  { job = Job()  }
+  onDestroy() { job.cancel() }
+  
+  fun someMethod(){
+    // can be used directly in this scope 
+    launch{
+      // code 
+    }
+    async{
+      // code 
+    }
+  }  
+}
+
+launch and async require no start method call
+calling await() on async will hold the current execution for result
+calling join() will hold the current execution until launch scope finishes execution 
+
+
+
+
+
