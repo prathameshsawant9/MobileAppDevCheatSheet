@@ -14,9 +14,10 @@ launch(): Job          // join ()
 async() : Deferred<T>  // await() behaves similar to Future of java, which can be 
 
 launch vs async
-========================================================
+--------------------------------------------------------
 launch  : should be used when the result doesnt matter only execution is important
-          any exception occuring inside the launch function is treated as uncaught exception.
+          any exception occuring inside the launch function is treated as uncaught exception and it crashes the application,
+          compulsorily needs a handler to avoid this crash scenario.
           if child crashes it cancels the parent
           join is used to wait for completion 
          
@@ -26,7 +27,7 @@ async   : should be used when the result is important
          
          
 Usage         
-========================================================
+--------------------------------------------------------
 1. 
 val launchScope = GlobalScope.launch(Dispatchers.IO){ // your code  }
 
@@ -43,6 +44,8 @@ val asyncScope  = withContext(Dispatchers.IO){ // your code }
 
 3. 
 class MainActivity : AppCompatActivity(), CoroutineScope{
+
+  // On which do you wish to run i.e Dispatcher + job 
   override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
@@ -66,7 +69,50 @@ launch and async require no start method call
 calling await() on async will hold the current execution for result
 calling join() will hold the current execution until launch scope finishes execution 
 
+Cancelling Jobs
+--------------------------------------------------------
+job.cancelChildren() vs job.cancel()
 
+use 
+[job.cancel] 
+only if you want to end the jobs permanently, you will then have to create job object using job = Job() 
+to start a new job scope else all future launch/async won't run. 
+
+use 
+[job.cancelChildren()] 
+if you want to cancel all current jobs, but keep the future launch/async alive. 
+
+Exception Handling
+--------------------------------------------------------
+
+Case 1: 
+
+onCreate(){
+  // Crashes the application, since all exceptions are uncaught
+  GlobalScope.launch(Dispatchers.IO) { unpredictable() }
+  
+  // Doesn't crash the application
+  GlobalScope.async(Dispatchers.IO)  { unpredictable() }    
+}
+
+Case 2: (using coroutine scope)
+
+// Exception Handler 
+private  val handler = CoroutineExceptionHandler { _, exception -> println("Hello Caught $exception") }
+
+// Adding the handler to the context 
+override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job + handler
+
+onCreate(){
+    // doesn't crash 
+    // coz uncaught exception is handled by the exception handler passed in the coroutineContext
+    launch{
+        unpredictable()  
+    }
+}
+
+fun unpredictable() = throw RuntimeException("It is unfortunate that you are reading this message")
 
 
 
