@@ -121,7 +121,8 @@ onCreate(){
 
 fun unpredictable() = throw RuntimeException("It is unfortunate that you are reading this message")
 
-
+Note: But after the exception has been handled it changes the state of the job to completed 
+after which it longer executes any more execution from launch and async. 
 
 
 
