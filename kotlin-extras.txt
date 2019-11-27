@@ -121,8 +121,14 @@ onCreate(){
 
 fun unpredictable() = throw RuntimeException("It is unfortunate that you are reading this message")
 
-Note: But after the exception has been handled it changes the state of the job to completed 
-after which it longer executes any more execution from launch and async. 
+SupervisorJob vs Job
+(1) incase of Job()
+exception thrown in child can kill the parent, so it basically requires a exception handler to be passed in the coroutine context. When the exception is caught by the handler provided in the context the job is set to completed. 
+Once the state of the job is set to completed it no longer executes any launch & asyn calls.
+
+(2) incase of SupervisorJob() 
+exception thrown in child doesnt kill the parent but it requires exception handler to be passed in the coroutine context else the application will crash. Also as the job is not affected it doesn't move into completed state and does accept any launch & async calls.
+
 
 
 
