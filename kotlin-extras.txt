@@ -102,7 +102,7 @@ onCreate(){
   GlobalScope.async(Dispatchers.IO)  { unpredictable() }    
 }
 
-Case 2: (using coroutine scope)
+Case 2: (using coroutine scope) // handling the above scenario 
 
 // Exception Handler 
 private  val handler = CoroutineExceptionHandler { _, exception -> println("Hello Caught $exception") }
