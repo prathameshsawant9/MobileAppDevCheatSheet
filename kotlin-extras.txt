@@ -71,16 +71,23 @@ calling join() will hold the current execution until launch scope finishes execu
 
 Cancelling Jobs
 --------------------------------------------------------
+
+Case 1 when using (1)-CoroutineScope & when using (2)-viewModelScope
+
 job.cancelChildren() vs job.cancel()
 
 use 
-[job.cancel] 
+[job.cancel()]                                              for (1)
+[viewModelScope.coroutineContext.cancel()]                  for (2)
+
 only if you want to end the jobs permanently, you will then have to create job object using job = Job() 
 to start a new job scope else all future launch/async won't run. 
 
 use 
-[job.cancelChildren()] 
+[job.cancelChildren()]                                      for (1)
+[viewModelScope.coroutineContext.cancelChildren()]          for (2)
 if you want to cancel all current jobs, but keep the future launch/async alive. 
+
 
 Exception Handling
 --------------------------------------------------------
@@ -113,6 +120,9 @@ onCreate(){
 }
 
 fun unpredictable() = throw RuntimeException("It is unfortunate that you are reading this message")
+
+
+
 
 
 
