@@ -161,6 +161,26 @@ new Migration(1, 2) {
     }
 };
   
+TypeConverters  
+--------------------------------------------------------
+
+
+ROOM & RETROFIT 
+--------------------------------------------------------
+Same POJO works for both 
+
+@Entity
+public class User {
+  @PrimaryKey(autoGenerate = true)
+  @SerializedName("userID")
+  int userID;
+  
+  @ColumnInfo(name = "userName")
+  @SerializedName("nameUser")
+  String name;
+}  
+
+ROOM can use the same pojo as well as retrofit using GSON works fine also when used individually. 
   
 SignalR Android
 ========================================================
