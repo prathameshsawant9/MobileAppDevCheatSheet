@@ -239,6 +239,18 @@ FragmentB {
   }	
 }
 
+Appcompat methods in Fragment 
+========================================================
+startActivity() 		// doesnt require activity reference
+startActivityForResult()
+callback : onActivityResult 
+
+& 
+
+requestPermission() 		// doesnt require activity/appcompat reference
+callback : onRequestPermissionsResult
+
+
 View Pager 
 ========================================================
 Fragment visibility check 
