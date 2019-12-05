@@ -1,0 +1,121 @@
+Looper - It runs multiple task simultaneously on a single thread
+
+Keystore is used to store sensitive data like password.It is difficult to extract from device.
+Steps - 
+Get the instance of Key Generator and mention the type of the algo that u want to use like AES/DES.
+Set properties of key using KeyGenParameterSpec
+Init KeyGeneratoer
+Get the Cipher instance
+Use that cipher for encryption	
+
+Alarm Manager - If you want to run some piece of code at particular time
+
+Dagger - 
+BindInstance - To get the available data before building component.
+Module - Class which having provider methods
+Scope - To make object that can be live as long as your activity lives or application lives.eg. ActivityScope,ApplicationScope
+Qualifier - If you want multiple instances of same class.
+Component - It is interface of abstract class in which all modules are mentioned.
+Inject - Tell the dagger to get the instance of requested class from dagger graph.
+
+Cold Observable - It does not emits the data/item until subscribers subscribes.
+Hot Observable - It emits the items
+
+Association - Relationship bet 2 different classes
+Composition and Agrregation are 2 forms of Association 
+
+Polymorphism - Single action can be performed in multiple	ways.
+ 
+Compile Time Polymorphism - Overloading -> Type of the object is determine at compile time
+Run time/Dynamic Polymorphism - Overriding -> Type of the object is determine at run time
+
+Fragment popbackstack - 
+mgr.popbackstack() - removes the top fragment from the stack
+Mgr.popBackstack(tag,FragmentManager.POP_BACK_STACK_INCLUSIVE) - removes the fragment having tag which you have mentioned
+Mgr..popBackStackImmediate(3, FragmentManager.POP_BACK_STACK_INCLUSIVE) - similar to above.
+
+PopbackstackImmediate() - perform the popping command immediately in the call before the function returns.
+PopBackstack() - perform the popping command within the next event loop cycle(slightly later)
+
+Pull to refresh - SwipeRefreshLayout is use
+
+Thread will not work if your application is not active.Hence we use service for that.
+
+finishAffinity() is not used to "shutdown an application". It is used to remove a number of Activity s belonging to a specific application from the current task
+
+To Call Parent Fragment method from Child Fragment ->
+ParentFragment parentFrag = ((ParentFragment)ChildFragment.this.getParentFragment());
+       parentFrag.someMethod();
+  -  Use interface,Event Bus
+  -  ((YourParentFragment) getParentFragment()).parentFragmentMethod();
+
+For Device Root Check - 
+Use SafetyNet API of google.
+It provides below api’s - 
+1] SafetyNet attestation API - to check device is rooted or not, also check app is running on emulator or not.Here snet service is running in the background which sends device information to the server.
+2] SafetyNet reCaptcha api - to check human is interacting with your app or not.
+3] Safetynet safe browsing API - It checks the web page that u r browsing contains the malicious content or not.
+4]SafetyNet verify app API - It checks whether your application contains the code which breaks the Android security.
+
+Steps to use SafetNet - 
+1] Login in to Google Developer Console.Create Project with pkg name.Enable Android Device verification.
+2]Generate API key using pkg name
+3] Include dependency in gradle.
+4] Add metadata in Android Manifest and include api key as a value
+5] Set connection to google play services
+6] Generate the nonse (one time token)
+7] Create compatibility request.you will get JWS(Json Web Signature) response from server.
+8] Decode it to simple JSON object.From this json you have to read value of ctsProfileMatch and basicIntegrity.As both are boolean values.If both are true then your device pass the safety net test.
+
+ctsProfileMatch check your device is rooted or not.also check app is running on emulator or not.
+
+basicIntegrity - It will return false if your device is tampered I.e. custom ROM,BootLoader is enable.
+
+
+While moving from Activity 1 to Activity 2 following methods called in order to -
+
+onPause - Activity 1
+OnCrate - Activity 2
+onStart - Activity 2
+onResume - Activity 2
+onStop - Activity 1
+
+
+To insert complex object in Room - 
+@Embedded is used
+@TypeConverter is used if field is list type(It convert list into primitive type and vice versa)
+Eg. @TypeConverters(DataTypeConverter.class)
+    private List<MyListObject> mList = null;
+@Relation - Used to handle relations like one to one, one to many
+
+
+addOnBackStackChangeListener callback is called while adding and removing fragment.
+
+setRetainInstance(true) is use in fragment if we want the fragment will not destroy if activity is destroy and recreated while config changes.
+
+FragmentPagerAdapter - It store the each fragment in memory which is visited by user.Only view is destroyed when fragment is invisible. Used if we want to store whole fragment into memory. 
+
+FragmentStatePagerAdapter - Fragment instance is destroyed when it is invisible to the user.Used if we have dynamic fragment like fragment with widgets.
+
+Adapters - Responsible for converting each entry to view.
+
+commit() - Synchronous and returns boolean
+apply() - Asynchronous and does not returns anything
+
+To reduce build time - 
+org.gradle.daemon = true
+org.gradle.confingureondemand = true
+Increase heap size
+org.gradle.parallel = true
+
+
+ViewPager2 -
+Vertical Orientation
+Moved from PagerAdpter to RecyclerView.Adapter
+Better control over Animation
+Smart Page Change listener
+
+
+Camera X - 
+It is life cycle aware 
+You can bind it by using CameraX.bindToLifeCycle()
