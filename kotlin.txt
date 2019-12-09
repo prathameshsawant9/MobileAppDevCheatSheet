@@ -297,3 +297,41 @@ fun Example.printFunctionType(i: Int) { println("Extension function") }
 
 Example().printFunctionType()   // output : Class method 
 Example().printFunctionType(1)  // output : Extension function
+
+Inner Class 
+========================================================
+
+// Java
+// holding reference of outer class 
+class A {
+    class B {
+    ...
+    }
+}
+
+// Kotlin 
+// holding reference of outer class 
+class A {
+    inner class B {
+    ...
+    }
+}
+
+vs 
+
+Inner static class 
+--------------------------------------------------------
+// Java 
+class A {
+    static class B {
+    ...
+    }
+}
+
+// Kotlin 
+class A {
+    class B {
+    ...
+    }
+}
+
