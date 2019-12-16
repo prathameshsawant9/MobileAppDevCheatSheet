@@ -160,10 +160,67 @@ new Migration(1, 2) {
         // there's nothing else to do here.
     }
 };
-  
-TypeConverters  
---------------------------------------------------------
 
+Join or Complex Entity 
+--------------------------------------------------------
+@Entity
+public class User {
+    @PrimaryKey public long userId;
+    public String name;
+}
+
+@Entity
+public class Library {
+    @PrimaryKey public long libraryId;
+    public long userOwnerId;
+}
+
+Make pojo for simple nested query 
+
+public class UserAndLibrary {
+    @Embedded public User user;
+    
+    @Relation(
+         parentColumn = "userId",
+         entityColumn = "userOwnerId"
+    )
+    
+    // For single one to one 
+    public Library library;
+    
+    OR 
+    
+    // For one to many 
+    public List<Playlist> playlists;
+
+}
+
+DAO Queries 
+@Query("SELECT * FROM User")
+
+public List<UserWithPlaylists> getUsersWithPlaylists();
+or 
+public UserAndLibrary getUsersWithLibrary();
+  
+TypeConverters  // converting custom data type like LONG => DATE and vice versa
+--------------------------------------------------------
+To use a custom data type whose value you would like to store in a single database column
+
+public class Converters {
+    @TypeConverter
+    public static Date fromTimestamp(Long value) {
+        return value == null ? null : new Date(value);
+    }
+
+    @TypeConverter
+    public static Long dateToTimestamp(Date date) {
+        return date == null ? null : date.getTime();
+    }
+}
+
+// Just declare in the room database 
+@TypeConverters({Converters.class})
+public abstract class AppDatabase extends RoomDatabase {}
 
 ROOM & RETROFIT 
 --------------------------------------------------------
