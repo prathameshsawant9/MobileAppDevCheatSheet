@@ -11,6 +11,18 @@ onDestroy	: called before the activity is destroyed.
 
 ** onDestroy can be called without onPause and onStop, if finish is called in onCreate()
 
+Activity A, B 
+calling B from A
+-----------------------------------------------------
+A -> pause
+B -> create, start, resume
+A -> stop
+
+Back pressed 
+B -> pause 
+A -> restart, start, resume
+B -> stop, destroy
+
 
 Activity & Task Manifest
 ========================================================
