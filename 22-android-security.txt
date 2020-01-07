@@ -1,0 +1,4 @@
+
+// This shows the activity as blank/blur in recent apps of android
+getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, 
+                     WindowManager.LayoutParams.FLAG_SECURE);
