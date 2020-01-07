@@ -1,3 +1,7 @@
+// Set Max Length
+editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(control.maxLength), new InputFilter.AllCaps()});
+
+
 Security 
 ========================================================
 APK Tampering
