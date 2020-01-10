@@ -1,6 +1,10 @@
+* Service extends ContextWrapper
+* Activity extends ContextThemeWrapper 
+* Application extends ContextWrapper
+
+
 // Set Max Length
 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(control.maxLength), new InputFilter.AllCaps()});
-
 
 Security 
 ========================================================
