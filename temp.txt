@@ -119,3 +119,19 @@ Smart Page Change listener
 Camera X - 
 It is life cycle aware 
 You can bind it by using CameraX.bindToLifeCycle()
+
+Maps API 
+update map realtime signalR 
+
+DS 
+binarytree 
+linkedlist 
+
+java thread lifecycle
+
+recyclerview 
+diff utils
+
+execute room queries in background 
+
+Phone rotate activity lifecyle 
