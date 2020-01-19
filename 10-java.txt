@@ -124,6 +124,11 @@ class MemoryClass {
    public void finalize(){ sop("will be called during GC") }
 }
 
+try{}
+finally{
+   // catch is not necessary here 
+}
+
 syncronized 
 ========================================================
 when multiple threads are accessing one object, each should access it one at a time. 
