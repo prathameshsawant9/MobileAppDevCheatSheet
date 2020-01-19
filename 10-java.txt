@@ -80,6 +80,19 @@ Creational (builders, factory, Singleton, Monostate, Fluent Interface Patterns)
 Structural (adapter, decorator, facade)
 Behavioural(chain of responsibility, iterator & strategy)
 
+1. Creational 
+builder                    = AlertDialog.Builder(this).setTitle().build()
+dependency                 = dagger2
+singleton                  = object Singleton { fun display() {} } //  Singleton.display()
+
+2. Structural
+adapter                    = Recylerview.Adapter
+facade                     = Using interface in retrofit
+
+3. Behavioural 
+chain of responsibility    = process request in chain 
+
+
 Variables
 ========================================================
 Local = methods 
