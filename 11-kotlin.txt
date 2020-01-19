@@ -3,6 +3,14 @@ Kotlin
 classes & methods are by default 
 "public final " in nature 
 
+Array 
+========================================================
+val arr = Array(3) { "" }  // is equivalent for: arrayOf("","","")
+or 
+val arr = Array<String?>(5){null}
+or
+var arr = emptyArray<String>()
+
 Visibility Modifier
 ========================================================
 private       : same as java 
