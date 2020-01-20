@@ -23,6 +23,18 @@ B -> pause
 A -> restart, start, resume
 B -> stop, destroy
 
+Activity Rotate 
+-----------------------------------------------------
+onPause
+onSaveInstanceState
+onStop
+onDestroy
+
+onCreate
+onStart
+onRestoreInstanceState
+onResume
+
 
 Activity & Task Manifest
 ========================================================
