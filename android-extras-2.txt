@@ -1,0 +1,27 @@
+layout 
+  <fragment android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+code
+
+Activity implements {
+  onCreate {
+    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+  }
+
+  onMapReady(GoogleMap map) {
+    LatLng sydney = new LatLng(-34, 151);
+  
+    // Create custom marker
+    m1 = MarkerOptions().position(sydney)
+                   .title("Sydney")
+                   .snippet("Population: 4,627,300")
+                   .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+  
+    map.addMarker(m1)
+    map.moveCamera(sydney)
+  }
+}
+ 
+ 
