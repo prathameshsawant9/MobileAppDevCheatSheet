@@ -359,6 +359,11 @@ An exception to this behavior is that observers also receive an update when they
 Furthermore, if the observer changes from inactive to active a second time, 
 it only receives an update if the value has changed since the last time it became active.
 
+new Observer<String>() {
+    public void onChanged(@Nullable final String newName) {}
+}
+
+
 lifecycleOwner are refresh when create, pause, resume stop destroy are called !
 
 with Event Wrapper : content handled 
@@ -369,6 +374,11 @@ https://medium.com/@star_zero/singleliveevent-livedata-with-multi-observers-384e
 
 Transformations.map => similar to RxJava map 
 custom transformations can be implemented using MediatorLiveData 
+example : 
+
+val userAddedData: LiveData<String> = Transformations.map(userLiveData, ::someFunc)
+private fun someFunc(user: User) = "New user ${user.username} added to database!"
+
 
 setValue = call from MainThread ; postValue = call from Worker Thread
 
