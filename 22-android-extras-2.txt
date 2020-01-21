@@ -18,6 +18,11 @@ Activity implements {
                    .title("Sydney")
                    .snippet("Population: 4,627,300")
                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.arrow))
+                   
+    m1.setOnMarkerClickListener{  } 
+    
+    // for custom layout, you need to create bitmap from the view 
+    m1.icon( getMarkerBitmapFromView() )
   
     map.addMarker(m1)
     map.moveCamera(sydney)
