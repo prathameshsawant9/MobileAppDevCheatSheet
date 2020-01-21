@@ -488,6 +488,11 @@ extends Worker{
   }
 }
 
+// chain one time request 
+WorkManager.beginWith(work1, work2)
+	   .then(work3)
+	   .enqueues()
+
 Handler 
 ========================================================
 = new Handler(Looper.getMainLooper()) { 
