@@ -105,6 +105,23 @@ view.setOnClickListener(mOnClickListener)
 // less coupled 
 recyclerView.addOnItemTouchListener()
 
+// DiffUtils 
+Diffutils vs notifydatasetchanged()
+
+YourUtil extends DiffUtil.Callback {
+  public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {}
+  public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {}
+}
+
+YourAdapter extends Recyclerview.Adapater{
+  public void yourUpdateMethod(){
+    DiffUtil.calculateDiff(diffCallback); 
+    diffResult.dispatchUpdatesTo(this);
+  }
+}
+
+
+
 Room - JetPack
 ========================================================
 Types
