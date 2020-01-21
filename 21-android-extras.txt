@@ -3,6 +3,11 @@
 * Application extends ContextWrapper
 
 
+// Reorder item in Recylerview with Animation 
+Collections.swap(this.mListItems, oldIndex, index); 
+notifyItemMoved(oldIndex, newIndex)
+
+
 // Set Max Length
 editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(control.maxLength), new InputFilter.AllCaps()});
 
