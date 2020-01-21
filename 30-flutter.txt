@@ -3,6 +3,17 @@ Flutter
 Dart 
 var, const, dynamic , String, int 
 
+// you can change value of dynamic type 
+dynamic x = 'hal';
+x = 123;
+  
+print(x);
+
+// you cannot change value of var type once it is defined
+var a = 'hal';
+a = 123;
+print(a);
+
 Stateless & StatefulWidget 
 void main() => runApp(MyApp())
 MyApp extends StatelessWidget { build{ MaterialApp ( home: Scaffold ( appBar: AppBar(  ) body : Center( child : Text("Hello") )) ) } }
