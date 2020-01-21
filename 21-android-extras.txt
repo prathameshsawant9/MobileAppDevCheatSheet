@@ -34,9 +34,9 @@ class YourLiveWallpaper extends WallpaperService{
 
 Fitting for phones & tabs 
 ========================================================
-phones dp           = 1 dp 
-7   inch tablet     = 1.5 dp
-10  inch tablet     = 2 dp 
+phones dp           = 1 dp       (values )
+7   inch tablet     = 1.5 dp     (values-large)
+10  inch tablet     = 2 dp       (values-xlarge)
 
 Service vs Intent Service 
 ========================================================
