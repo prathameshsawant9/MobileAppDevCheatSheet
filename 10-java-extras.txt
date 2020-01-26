@@ -47,6 +47,38 @@ Collection.reverse(list)
 // Sorting asc / descending
 Collection.sort(list, new Comparator())
 
+Thread wait & notify 
+-------------------------------------------------
 
+https://javarevisited.blogspot.com/2013/12/inter-thread-communication-in-java-wait-notify-example.html
+
+Message {
+  String msg;
+}
+
+Waiter implements Runnable{
+  run(){
+    synchronised(Message){
+      Message.wait()
+    }
+  }
+}
+
+Notifier implements Runnable{
+  run(){
+    synchronised(Message){
+       Message.notify()
+    }
+  }
+}
+
+new Thread(new Waiter(msg)).start()
+new Thread(new Notifier(msg)).start()
+
+if 
+
+Notifier extends Thread
+then 
+new Notifier().start()
 
 
