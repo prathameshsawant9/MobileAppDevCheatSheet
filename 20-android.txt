@@ -721,6 +721,14 @@ Operators
 	input -> ( ().delay( 1 sec ) , ().delay( 1 sec ) )
 	output-> ( 2 sec )
 	
+	
+Create : This can be used to emit mutliple items using custom emitter 
+
+vs 
+
+fromCallable : This is used only for to emit one item 
+	
+	
 MLKit 
 ========================================================
 face detection types 
