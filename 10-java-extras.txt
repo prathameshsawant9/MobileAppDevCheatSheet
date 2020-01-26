@@ -36,6 +36,7 @@ Collection
 
 ArrayList is not syncronised, Vector is syncronised 
 HashMap is not , HashTable is 
+StrinfBuffer is thread safe, StringBuilder is not thread safe. 
 
 Collection is an interface for(list, set, queue) whereas Collections is a class
 
