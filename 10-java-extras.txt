@@ -50,6 +50,16 @@ Collection.reverse(list)
 // Sorting asc / descending
 Collection.sort(list, new Comparator())
 
+ConcurrentHashmap 
+-locks at granular level hence much faster
+
+vs 
+
+
+Collections.synchronizedMap(new TreeSet<Integer, String>())
+-locks the entire collections thus performance overhead
+
+
 Thread wait & notify 
 -------------------------------------------------
 
@@ -92,3 +102,20 @@ Throwable
 1. Exception : Runtime, IO, IndexOutOfBound 
 
 2. Error : StackOverFlow, OutOfMemory Exception
+
+
+// Executing multiple thread 
+ExecutorService executor = Executors.newFixedThreadPool( 30 );
+
+for(i < 10){
+  executor.execute(new MyRunnable());
+}
+
+// to check if executor has finished we shutdown 
+
+// Wait until all threads are finish
+while (!executor.isTerminated()) {}
+
+executor.shutdown();
+
+
