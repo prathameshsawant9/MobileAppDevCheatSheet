@@ -166,3 +166,10 @@ Show vertical list in one fragment, on orientation change show different fragmen
 Call 4 functions from repository n perform UI operation only if all the data is received
 AsyncTask in Activity, Activity rotated 10 times, onPostExecute how many times called. If need to call only once how to implement?
 Call API of only 1 fragment in ViewPager from 3 fragments i.e 2nd fragments api methods should not be called unless visible
+
+private static ExecutorService service = ExecutorService.create()
+
+AsyncTask.executeOnExecutor(executor, params);
+
+onPause()
+executor.shutdown()
