@@ -1,0 +1,52 @@
+Java Questions 
+----------------------------------------------------
+
+URL : https://www.javatpoint.com/java-collections-interview-questions
+
+java file can be saved with just .java 
+javac .java 
+call by the main class 
+
+Constructor has return type ? it returns the instance of the class 
+
+Aggregation == Composition == has a 
+
+immutable class in Java? declare class as final 
+
+Interface can also have a class 
+
+How to unreference a object : 
+nulling the reference, assigning reference to another, anonymous
+
+Java Concurrency API 
+Executor, FarkJoinPool, ExecutorService, Cyclic Barrier, ThreadFactory, BlockingQueue, DelayQueue
+Locks, Phaser 
+
+Future, CountDownLatch, Semaphore 
+
+Semaphores : Restrict the number of threads that can access a resource. new Semaphore(4) ; sem.acquire() ; sem.release() ; 
+Mutex : Only one thread to access a resource at once.
+
+https://mkyong.com/java/java-thread-mutex-and-semaphore-example/
+
+Collection 
+----------------------------------------------------
+
+ArrayList is not syncronised, Vector is syncronised 
+HashMap is not , HashTable is 
+
+Collection is an interface for(list, set, queue) whereas Collections is a class
+
+Collections.synchronizedList(List l) -> converts any collection into syncronised list
+synchronizedSet(), synchronizedSortedSet(), synchronizedSortedMap()
+
+read-only arraylist = Collections.unmodifiableCollection()
+
+Collection.reverse(list)
+
+// Sorting asc / descending
+Collection.sort(list, new Comparator())
+
+
+
+
