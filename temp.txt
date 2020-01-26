@@ -135,3 +135,34 @@ diff utils
 execute room queries in background 
 
 Phone rotate activity lifecyle 
+
+OOPs Concept with uses
+Features in Android 10 with uses
+Explain Scoped Storage
+Features in Android 7 with uses
+How does WorkManager works in SDK below 19
+How would you implement Real time tracking & data updates in your app?
+Dijkstra's Algorithm
+What are Notification Channels?
+
+Activity has frame layout, we add First fragment, add 2nd fragment not in backstack, rotate device, replace 3rd fragment, Note down life cycle methods with back click events
+Explain working of Google app update (i.e When you have multiple applications to update & you click the fifth app to update, then it moves to first position, then starts download progress, then moves out of the list after installation is complete)
+
+Java Programs
+Factorial
+Duplicate numbers in ArrayList // 2, 0, 0, 1, 6, 9, 2, 7 => 2, 0
+Reverse copy array (BEST Method [no loop, no System.arrayCopy]) // ‘h’,’e’,’l’,’o’.   => o,l,e,h => 
+
+Explain MVVM?
+Transformation.map & Transformation.switchMap
+Different Flavours in single project; All flavour types are required in Playstore; How?
+Change app colours according to Events(Diwali, Christmas)?
+Can we use LiveData in Repository layer?
+
+Scenario
+Single activity fragments, first fragment shows list of movies with pagination of 10 records only, scroll till 5 page, click on 50th row, replace 
+Frame layout with second fragment, click back event, note down the lifecycle methods called & on when back on first fragment, show 50th row only
+Show vertical list in one fragment, on orientation change show different fragment with GridView list.
+Call 4 functions from repository n perform UI operation only if all the data is received
+AsyncTask in Activity, Activity rotated 10 times, onPostExecute how many times called. If need to call only once how to implement?
+Call API of only 1 fragment in ViewPager from 3 fragments i.e 2nd fragments api methods should not be called unless visible
