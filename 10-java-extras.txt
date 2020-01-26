@@ -27,6 +27,8 @@ Future, CountDownLatch, Semaphore
 Semaphores : Restrict the number of threads that can access a resource. new Semaphore(4) ; sem.acquire() ; sem.release() ; 
 Mutex : Only one thread to access a resource at once.
 
+Semaphores(int permits) => so the limit is practically the integer values.
+
 https://mkyong.com/java/java-thread-mutex-and-semaphore-example/
 
 Collection 
