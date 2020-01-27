@@ -68,5 +68,5 @@ public class ParameterizedTestFields {
         assertEquals("Result", result, tester.multiply(m1, m2));
     }
 }
-
+   
 
