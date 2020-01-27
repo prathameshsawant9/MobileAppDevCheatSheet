@@ -1,4 +1,4 @@
-JUnit 
+JUnit 4 
 source: https://www.vogella.com/tutorials/JUnit/article.html
 ==============================================================================
 // See the method naming conventions
@@ -6,10 +6,11 @@ source: https://www.vogella.com/tutorials/JUnit/article.html
 @Test
 public void multiplicationOfZeroIntegersShouldReturnZero{
     MyClass sut = new MyClass(); 
-
-    assertThat(0, sut.multiply(10,  0), "Result should be 0")
-    assertThat(0, sut.multiply( 0, 10), "Result should be 0")
-    assertThat(0, sut.multiply( 0,  0), "Result should be 0")
+    
+    // message , expected, actual 
+    assertThat("Result should be 0", 0, sut.multiply(10,  0))
+    assertThat("Result should be 0", 0, sut.multiply( 0, 10))
+    assertThat("Result should be 0", 0, sut.multiply( 0,  0))
 }
  
 // famous annotations 
@@ -68,5 +69,19 @@ public class ParameterizedTestFields {
         assertEquals("Result", result, tester.multiply(m1, m2));
     }
 }
-   
+
+// Rules add behavior to the test, so 
+
+@Rule
+public TemporaryFolder folder = new TemporaryFolder();
+File createdFolder = folder.newFolder("newfolder");
+File createdFile = folder.newFile("myfilefile.txt");
+assertTrue(createdFile.exists());
+
+// Category 
+public interface FastTests { }
+public interface SlowTests { }
+
+It is possible to define categories of tests and include or exclude them based on annotations.
+https://www.vogella.com/tutorials/JUnit/article.html
 
