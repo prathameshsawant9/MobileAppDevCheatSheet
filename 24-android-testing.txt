@@ -1,0 +1,19 @@
+JUnit 
+source: https://www.vogella.com/tutorials/JUnit/article.html
+-------------------------------------------------
+// See the method naming conventions
+
+@Test
+public void multiplicationOfZeroIntegersShouldReturnZero{
+    MyClass sut = new MyClass(); 
+
+    assertThat(0, sut.multiply(10,  0), "Result should be 0")
+    assertThat(0, sut.multiply( 0, 10), "Result should be 0")
+    assertThat(0, sut.multiply( 0,  0), "Result should be 0")
+}
+ 
+
+ 
+
+
+
