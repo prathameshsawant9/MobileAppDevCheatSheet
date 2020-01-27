@@ -1,6 +1,6 @@
 JUnit 
 source: https://www.vogella.com/tutorials/JUnit/article.html
--------------------------------------------------
+==============================================================================
 // See the method naming conventions
 
 @Test
@@ -12,8 +12,61 @@ public void multiplicationOfZeroIntegersShouldReturnZero{
     assertThat(0, sut.multiply( 0,  0), "Result should be 0")
 }
  
+// famous annotations 
 
- 
+@Test                               = Identifies a method as a test method. ex identifies as test method 
+@Test (expected = Exception.class)  = Fails if the method doesnt throw exception
+@Test (timeout=100)                  = Fails if the method takes longer than 100 milliseconds
 
+
+@Before         = Executed before each test. ex read input data / initialise class 
+@After          = Executed after each test. ex del temp data / restore defaults 
+@BeforeClass    = Executed once, before the start of all tests. ex to connect db (needs to be static)
+@AfterClass     = Executed once, after all tests have been finished ex to disconnect db (needs to be static)
+
+//Assert functions 
+assertEquals    ([message,] expected, actual)
+assertTrue      ([message,] boolean condition)
+assertFalse     ([message,] boolean condition)
+assertEquals    ([message,] expected, actual)
+
+// tolerance is the number of digit that must be same 
+assertEquals    ([message,] expected, actual, tolerance) ??
+
+assertNull      ([message,] object)
+assertNotNull   ([message,] object)
+assertSame      ([message,] expected, actual) // check if both object refer to same object 
+assertNotSame   ([message,] expected, actual)
+
+// To Run multiple test cases
+
+@RunWith(Suite.class)
+@SuiteClasses({ MyClassTest.class,  MySecondClassTest.class })
+public class AllTests {  }
+
+// To initialize parameters at 
+
+@RunWith(Parameterized.class)
+public class ParameterizedTestFields {
+    
+    @Parameter(0)
+    public int m1;
+    @Parameter(1)
+    public int m2;
+    @Parameter(2)
+    public int result;
+    
+    @Parameters
+    public static Collection<Object[]> data() {
+        Object[][] data = new Object[][] { { 1 , 2, 2 }, { 5, 3, 15 }, { 121, 4, 484 } };
+        return Arrays.asList(data);
+    }
+    
+    @Test
+    public void testMultiplyException() {
+        MyClass tester = new MyClass();
+        assertEquals("Result", result, tester.multiply(m1, m2));
+    }
+}
 
 
