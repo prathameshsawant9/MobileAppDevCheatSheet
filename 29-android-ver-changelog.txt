@@ -8,6 +8,7 @@ Android 10 - Q (API 29)
 - HTTPS compulsion 
 - Foldable support 
 - 5G Support 
+- DarkTheme support : <style name="AppTheme" parent="Theme.AppCompat.DayNight">
 
 Android 9 Pie (API 28)
 - HTTPS compulsion  
