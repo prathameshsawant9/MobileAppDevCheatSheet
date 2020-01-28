@@ -31,6 +31,9 @@ assertTrue      ([message,] boolean condition)
 assertFalse     ([message,] boolean condition)
 assertEquals    ([message,] expected, actual)
 
+// JUnit5 
+assertThrows    (MyException.class, () -> { list.size() })
+
 // tolerance is the number of digit that must be same 
 assertEquals    ([message,] expected, actual, tolerance) ??
 
