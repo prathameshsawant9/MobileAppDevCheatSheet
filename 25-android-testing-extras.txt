@@ -1,0 +1,73 @@
+JUnit & Mockito 
+========================================================
+Top keywords 
+1. mock         : full mock of the interface
+2. spy          : partial mock, when you want to just override some methods 
+3. verify       : to verify if method is called on that object 
+4. when         : to return custom result 
+
+
+Famous asserts statement                                  Argument Matcher
+
+assertThrows  (IndexOutOfBound.class, ()- {  })           any(String.class)
+assertEquals  (message, expected, actual)                 anyString()
+assertTrue    (message, boolean)                          anyBoolean()
+assertFalse   (message, boolean)                          anyList()
+assertNotNull (message, obj)                              anyInt()
+
+
+1. mock 
+
+val classUnderTest = mock(ClassUnderTestInterface.class)
+
+// Just to check if this method is callled once 
+verify
+----------------------------------------
+verify(obj).method()
+
+verify (obj, times(2)). method()
+verify (obj, atleast(2)). method()
+verify (obj, atmost(2)). method()
+verify (obj, only(2)). method()
+verify (obj, atleastOnce()). method()
+verify (obj, never(2)). method()
+
+when
+----------------------------------------
+when(obj.method()). thenReturn  ( 1 )
+                  . thenThrow   ( Exception.class )
+                  . thenAnswer  ( Answer(){   // if you want to modify the input param and then return the result  })
+                  
+To use with void method 
+
+doAnswer(new Answer<Integer>(){ return invocation.getArgumentAt(0, String.class).length * 2 })
+  .when(obj)
+  .stringLength("Hello World")
+  
+  
+doThrow(Exception.class)
+  .when(obj)
+  .stringLength("Hello World")
+  
+2. spy 
+
+  val list = new ArrayList()
+  val spyList = spy(list)
+  
+  when(spyList.size()).thenReturn(2)
+  
+  assertEqual(2, spyList.size())
+  
+  
+3. Argument Captor 
+  val singleCaptor = ArgumentCaptor<String>()
+  val arrayCaptor = ArgumentCaptor<String[]>()
+  
+  verify(obj).methodCall(singleCaptor.capture())
+  
+  val arg1 = singleCaptor.getValue()
+  val arguments = singleCaptor.getValues()
+  
+  
+  
+  
