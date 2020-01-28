@@ -9,7 +9,7 @@ Top keywords
 
 Famous asserts statement                                  Argument Matcher
 
-assertThrows  (IndexOutOfBound.class, ()- {  })           any(String.class)
+assertThrows  (IndexOutOfBound.class, () -> { yourObj.getItem(4) })           any(String.class)
 assertEquals  (message, expected, actual)                 anyString()
 assertTrue    (message, boolean)                          anyBoolean()
 assertFalse   (message, boolean)                          anyList()
