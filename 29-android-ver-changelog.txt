@@ -15,6 +15,8 @@ Android 9 Pie (API 28)
 - Notification Channel (reply button to notification)
 
 Android 8.0 Oreo (API 26, API 27)
+- Picture in Picture Mode
+- Notification Channels
 
 Android 7.0 Nougat (API 24, API 25)
 
